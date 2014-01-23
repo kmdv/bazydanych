@@ -1,0 +1,11 @@
+*.dbmdl
+*.user
+EnterpriseTraining/bin/
+EnterpriseTraining/obj/
+*.suo
+Database/sql/
+Database/obj/
+Database/_ConversionReport_Files/
+*.ldf
+*.mdf
+Database/ConversionLog.xml
