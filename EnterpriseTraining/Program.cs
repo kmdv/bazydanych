@@ -1,21 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+
+using EnterpriseTraining.Sql;
+using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        private const string ConnectionString =
+            "Data Source=(local);" +
+            "Initial Catalog=EnterpriseTraining;" +
+            "Integrated Security=SSPI;";
+
         [STAThread]
         static void Main()
         {
+            var sqlContext = new DefaultSqlContext(ConnectionString);
+            var entitySaver = new DefaultEntitySaver();
+            var entityLoader = new DefaultEntityLoader();
+            var entityRemover = new DefaultEntityRemover();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var mainForm = new MainForm(sqlContext, entityLoader, entitySaver, entityRemover);
+
+            Application.Run(mainForm);
         }
     }
 }
