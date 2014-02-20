@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace EnterpriseTraining.Entities
 {
-    public interface IEntityRemover
+    public interface IEntityRemover<T>
     {
-        void Remove(SqlConnection connection, IEnumerable<int> ids);
+        void Remove(SqlConnection connection, IEnumerable<T> entities);
     }
 }

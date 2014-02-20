@@ -32,16 +32,24 @@
             EnterpriseTraining.ListManagement.NullListItemFactory nullListItemFactory1 = new EnterpriseTraining.ListManagement.NullListItemFactory();
             EnterpriseTraining.ListManagement.NullListItemRemover nullListItemRemover1 = new EnterpriseTraining.ListManagement.NullListItemRemover();
             EnterpriseTraining.ListManagement.NullListItemSaver nullListItemSaver1 = new EnterpriseTraining.ListManagement.NullListItemSaver();
+            EnterpriseTraining.ListManagement.NullListItemEditor nullListItemEditor2 = new EnterpriseTraining.ListManagement.NullListItemEditor();
+            EnterpriseTraining.ListManagement.NullListItemFactory nullListItemFactory2 = new EnterpriseTraining.ListManagement.NullListItemFactory();
+            EnterpriseTraining.ListManagement.NullListItemRemover nullListItemRemover2 = new EnterpriseTraining.ListManagement.NullListItemRemover();
+            EnterpriseTraining.ListManagement.NullListItemSaver nullListItemSaver2 = new EnterpriseTraining.ListManagement.NullListItemSaver();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listManager1 = new EnterpriseTraining.ListManagement.ListManager();
+            this.userManager = new EnterpriseTraining.ListManagement.ListManager();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.trainingManager = new EnterpriseTraining.ListManagement.ListManager();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -51,7 +59,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.listManager1);
+            this.tabPage1.Controls.Add(this.userManager);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -60,17 +68,40 @@
             this.tabPage1.Text = "Users";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // listManager1
+            // userManager
             // 
-            this.listManager1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listManager1.ItemEditor = nullListItemEditor1;
-            this.listManager1.ItemFactory = nullListItemFactory1;
-            this.listManager1.ItemRemover = nullListItemRemover1;
-            this.listManager1.ItemSaver = nullListItemSaver1;
-            this.listManager1.Location = new System.Drawing.Point(3, 3);
-            this.listManager1.Name = "listManager1";
-            this.listManager1.Size = new System.Drawing.Size(514, 357);
-            this.listManager1.TabIndex = 0;
+            this.userManager.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userManager.ItemEditor = nullListItemEditor1;
+            this.userManager.ItemFactory = nullListItemFactory1;
+            this.userManager.ItemRemover = nullListItemRemover1;
+            this.userManager.ItemSaver = nullListItemSaver1;
+            this.userManager.Location = new System.Drawing.Point(3, 3);
+            this.userManager.Name = "userManager";
+            this.userManager.Size = new System.Drawing.Size(514, 357);
+            this.userManager.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.trainingManager);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(520, 363);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Trainings";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // trainingManager
+            // 
+            this.trainingManager.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trainingManager.ItemEditor = nullListItemEditor2;
+            this.trainingManager.ItemFactory = nullListItemFactory2;
+            this.trainingManager.ItemRemover = nullListItemRemover2;
+            this.trainingManager.ItemSaver = nullListItemSaver2;
+            this.trainingManager.Location = new System.Drawing.Point(3, 3);
+            this.trainingManager.Name = "trainingManager";
+            this.trainingManager.Size = new System.Drawing.Size(514, 357);
+            this.trainingManager.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -82,6 +113,7 @@
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -90,7 +122,9 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private ListManagement.ListManager listManager1;
+        private ListManagement.ListManager userManager;
+        private System.Windows.Forms.TabPage tabPage2;
+        private ListManagement.ListManager trainingManager;
     }
 }
 

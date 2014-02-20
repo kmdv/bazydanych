@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Globalization;
 
 using EnterpriseTraining.Entities;
+using EnterpriseTraining.EntityManagement;
 
 namespace EnterpriseTraining
 {
-    public partial class EditUserForm : Form
+    public partial class EditUserForm : Form, IEntityEditForm<User>
     {
         private const string IntFormat = "{0:d}";
 
-        private User _user;
+        private User _user = new User();
 
-        public User User
+        public User Entity
         {
             get { return _user; }
             set { _user = value; }
@@ -20,8 +20,6 @@ namespace EnterpriseTraining
 
         public EditUserForm()
         {
-            User = new User();
-
             InitializeComponent();
         }
 

@@ -2,7 +2,7 @@
 
 using EnterpriseTraining.Sql;
 using EnterpriseTraining.Entities;
-using EnterpriseTraining.UserManagement;
+using EnterpriseTraining.EntityManagement;
 
 namespace EnterpriseTraining
 {
@@ -16,12 +16,23 @@ namespace EnterpriseTraining
 
             var userLoader = new SqlUserLoader();
             var userSaver = new SqlUserSaver();
+            var userRemover = new SqlUserRemover();
+
+            var userNameFactory = new UserNameFactory();
+
+            userManager.ItemEditor = new EntityItemEditor<User, EditUserForm>(_editUserForm, this);
+            userManager.ItemFactory = new EntityItemFactory<User>(connectionFactory, userLoader, userNameFactory);
+            userManager.ItemSaver = new EntityItemSaver<User>(connectionFactory, userSaver);
+            userManager.ItemRemover = new EntityItemRemover<User>(connectionFactory, userRemover);
+
+            /*var userLoader = new SqlUserLoader();
+            var userSaver = new SqlUserSaver();
             var userRemover = new SqlEntityRemover("Users", "UserId");
 
-            listManager1.ItemEditor = new UserItemEditor(_editUserForm, this);
-            listManager1.ItemFactory = new UserItemFactory(connectionFactory, userLoader);
-            listManager1.ItemSaver = new UserItemSaver(connectionFactory, userSaver);
-            listManager1.ItemRemover = new UserItemRemover(connectionFactory, userRemover);
+            userManager.ItemEditor = new UserItemEditor(_editUserForm, this);
+            userManager.ItemFactory = new UserItemFactory(connectionFactory, userLoader);
+            userManager.ItemSaver = new UserItemSaver(connectionFactory, userSaver);
+            userManager.ItemRemover = new UserItemRemover(connectionFactory, userRemover);*/
         }
     }
 }

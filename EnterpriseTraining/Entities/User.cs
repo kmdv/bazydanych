@@ -4,7 +4,7 @@ namespace EnterpriseTraining.Entities
 {
     public struct User
     {
-        public int Id { get; set; }
+        internal int Id { get; set; }
 
         public string FirstName { get; set; }
 
