@@ -1,8 +1,8 @@
 ﻿namespace EnterpriseTraining.EntityManagement
 {
-    public interface IEntityNameFactory<T>
+    public interface IEntityStringizer<T>
         where T : class
     {
-        string Create(T entity);
+        string Stringize(T entity);
     }
 }

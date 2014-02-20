@@ -3,11 +3,11 @@ using EnterpriseTraining.EntityManagement;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public sealed class UserNameFactory : IEntityNameFactory<User>
+    public sealed class UserStringizer : IEntityStringizer<User>
     {
         private const string FullNameFormat = "{0} {1}";
 
-        public string Create(User user)
+        public string Stringize(User user)
         {
             if (user.FirstName != null)
             {

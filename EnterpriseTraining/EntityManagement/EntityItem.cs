@@ -8,15 +8,15 @@ namespace EnterpriseTraining.EntityManagement
     public class EntityItem<T> : IListItem
         where T : class
     {
-        private readonly IEntityNameFactory<T> _entityNameFactory;
+        private readonly IEntityStringizer<T> _entityStringizer;
 
         private T _entity = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public EntityItem(IEntityNameFactory<T> entityNameFactory)
+        public EntityItem(IEntityStringizer<T> entityStringizer)
         {
-            _entityNameFactory = entityNameFactory;
+            _entityStringizer = entityStringizer;
         }
 
         public T Entity
@@ -39,7 +39,7 @@ namespace EnterpriseTraining.EntityManagement
 
         public override string ToString()
         {
-            return _entityNameFactory.Create(_entity);
+            return _entityStringizer.Stringize(_entity);
         }
     }
 }

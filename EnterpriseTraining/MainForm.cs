@@ -19,7 +19,7 @@ namespace EnterpriseTraining
             var userRemover = new SqlUserRemover();
             var userFactory = new DefaultUserFactory();
 
-            var userNameFactory = new UserNameFactory();
+            var userNameFactory = new UserStringizer();
 
             userManager.ItemEditor = new EntityItemEditor<User, EditUserForm>(_editUserForm, this);
             userManager.ItemFactory = new EntityItemFactory<User>(connectionFactory, userLoader, userFactory, userNameFactory);

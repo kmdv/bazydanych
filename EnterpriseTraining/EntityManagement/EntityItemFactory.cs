@@ -16,13 +16,13 @@ namespace EnterpriseTraining.EntityManagement
 
         private readonly IEntityFactory<T> _entityFactory;
 
-        private readonly IEntityNameFactory<T> _entityNameFactory;
+        private readonly IEntityStringizer<T> _entityNameFactory;
 
         public EntityItemFactory(
             ISqlConnectionFactory connectionFactory,
             IEntityLoader<T> entityLoader,
             IEntityFactory<T> entityFactory,
-            IEntityNameFactory<T> entityNameFactory)
+            IEntityStringizer<T> entityNameFactory)
         {
             _connectionFactory = connectionFactory;
             _entityLoader = entityLoader;
