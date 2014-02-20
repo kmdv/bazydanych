@@ -36,7 +36,7 @@ namespace EnterpriseTraining
             userListBox.DataSource = _userList;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             using (var connection = new SqlConnection(_sqlContext.ConnectionString))
             {
