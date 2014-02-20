@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
-using EnterpriseTraining.ListManagement;
+using EnterpriseTraining.ObjectManagement;
 using EnterpriseTraining.Sql;
 using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemFactory<T> : IListItemFactory 
+    public class EntityItemFactory<T> : IItemFactory 
         where T : class
     {
         private readonly ISqlConnectionFactory _connectionFactory;
@@ -30,16 +30,16 @@ namespace EnterpriseTraining.EntityManagement
             _entityNameFactory = entityNameFactory;
         }
 
-        public IListItem CreateNew()
+        public IItem CreateNew()
         {
             return new EntityItem<T>(_entityNameFactory) { Entity = _entityFactory.CreateNew() };
         }
 
-        public IList<IListItem> CreateFullList()
+        public IList<IItem> CreateFullList()
         {
             using (var connection = _connectionFactory.Create())
             {
-                var list = new List<IListItem>();
+                var list = new List<IItem>();
                 foreach (var entity in _entityLoader.LoadAll(connection))
                 {
                     list.Add(new EntityItem<T>(_entityNameFactory) { Entity = entity });

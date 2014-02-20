@@ -1,10 +1,10 @@
 ﻿using EnterpriseTraining.Entities;
-using EnterpriseTraining.ListManagement;
+using EnterpriseTraining.ObjectManagement;
 using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemSaver<T> : IListItemSaver 
+    public class EntityItemSaver<T> : IItemSaver 
         where T : class
     {
         private readonly ISqlConnectionFactory _connectionFactory;
@@ -17,7 +17,7 @@ namespace EnterpriseTraining.EntityManagement
             _entitySaver = entitySaver;
         }
 
-        public void SaveNew(IListItem listItem)
+        public void SaveNew(IItem listItem)
         {
             using (var connection = _connectionFactory.Create())
             {
@@ -25,7 +25,7 @@ namespace EnterpriseTraining.EntityManagement
             }
         }
 
-        public void SaveExisting(IListItem listItem)
+        public void SaveExisting(IItem listItem)
         {
             using (var connection = _connectionFactory.Create())
             {

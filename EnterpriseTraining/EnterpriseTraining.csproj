@@ -68,23 +68,23 @@
     <Compile Include="EntityManagement\IEntityEditForm.cs" />
     <Compile Include="EntityManagement\IEntityStringizer.cs" />
     <Compile Include="EntityManagement\EntityItemFactory.cs" />
-    <Compile Include="ListManagement\IListItemRemover.cs" />
-    <Compile Include="ListManagement\IListItem.cs" />
-    <Compile Include="ListManagement\IListItemFactory.cs" />
-    <Compile Include="ListManagement\IListItemSaver.cs" />
-    <Compile Include="ListManagement\ListItemEditResult.cs" />
-    <Compile Include="ListManagement\ListManager.cs">
+    <Compile Include="ObjectManagement\IItemRemover.cs" />
+    <Compile Include="ObjectManagement\IItem.cs" />
+    <Compile Include="ObjectManagement\IItemFactory.cs" />
+    <Compile Include="ObjectManagement\IItemSaver.cs" />
+    <Compile Include="ObjectManagement\ItemEditResult.cs" />
+    <Compile Include="ObjectManagement\ItemListManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ListManagement\ListManager.Designer.cs">
-      <DependentUpon>ListManager.cs</DependentUpon>
+    <Compile Include="ObjectManagement\ItemListManager.Designer.cs">
+      <DependentUpon>ItemListManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListManagement\NullListItemEditor.cs" />
-    <Compile Include="ListManagement\NullListItemFactory.cs" />
-    <Compile Include="ListManagement\NullListItemRemover.cs" />
-    <Compile Include="ListManagement\NullListItemSaver.cs" />
+    <Compile Include="ObjectManagement\NullItemEditor.cs" />
+    <Compile Include="ObjectManagement\NullItemFactory.cs" />
+    <Compile Include="ObjectManagement\NullItemRemover.cs" />
+    <Compile Include="ObjectManagement\NullListItemSaver.cs" />
     <Compile Include="Sql\DefaultSqlConnectionFactory.cs" />
-    <Compile Include="ListManagement\IListItemEditor.cs" />
+    <Compile Include="ObjectManagement\IItemEditor.cs" />
     <Compile Include="Sql\ISqlConnectionFactory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -102,8 +102,8 @@
     <EmbeddedResource Include="EditUserForm.resx">
       <DependentUpon>EditUserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListManagement\ListManager.resx">
-      <DependentUpon>ListManager.cs</DependentUpon>
+    <EmbeddedResource Include="ObjectManagement\ItemListManager.resx">
+      <DependentUpon>ItemListManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

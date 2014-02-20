@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            EnterpriseTraining.ListManagement.NullListItemEditor nullListItemEditor1 = new EnterpriseTraining.ListManagement.NullListItemEditor();
-            EnterpriseTraining.ListManagement.NullListItemFactory nullListItemFactory1 = new EnterpriseTraining.ListManagement.NullListItemFactory();
-            EnterpriseTraining.ListManagement.NullListItemRemover nullListItemRemover1 = new EnterpriseTraining.ListManagement.NullListItemRemover();
-            EnterpriseTraining.ListManagement.NullListItemSaver nullListItemSaver1 = new EnterpriseTraining.ListManagement.NullListItemSaver();
-            EnterpriseTraining.ListManagement.NullListItemEditor nullListItemEditor2 = new EnterpriseTraining.ListManagement.NullListItemEditor();
-            EnterpriseTraining.ListManagement.NullListItemFactory nullListItemFactory2 = new EnterpriseTraining.ListManagement.NullListItemFactory();
-            EnterpriseTraining.ListManagement.NullListItemRemover nullListItemRemover2 = new EnterpriseTraining.ListManagement.NullListItemRemover();
-            EnterpriseTraining.ListManagement.NullListItemSaver nullListItemSaver2 = new EnterpriseTraining.ListManagement.NullListItemSaver();
+            EnterpriseTraining.ObjectManagement.NullItemEditor nullListItemEditor1 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
+            EnterpriseTraining.ObjectManagement.NullItemFactory nullListItemFactory1 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
+            EnterpriseTraining.ObjectManagement.NullItemRemover nullListItemRemover1 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
+            EnterpriseTraining.ObjectManagement.NullListItemSaver nullListItemSaver1 = new EnterpriseTraining.ObjectManagement.NullListItemSaver();
+            EnterpriseTraining.ObjectManagement.NullItemEditor nullListItemEditor2 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
+            EnterpriseTraining.ObjectManagement.NullItemFactory nullListItemFactory2 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
+            EnterpriseTraining.ObjectManagement.NullItemRemover nullListItemRemover2 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
+            EnterpriseTraining.ObjectManagement.NullListItemSaver nullListItemSaver2 = new EnterpriseTraining.ObjectManagement.NullListItemSaver();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.userManager = new EnterpriseTraining.ListManagement.ListManager();
+            this.userManager = new EnterpriseTraining.ObjectManagement.ItemListManager();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.trainingManager = new EnterpriseTraining.ListManagement.ListManager();
+            this.trainingManager = new EnterpriseTraining.ObjectManagement.ItemListManager();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -122,9 +122,9 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private ListManagement.ListManager userManager;
+        private ObjectManagement.ItemListManager userManager;
         private System.Windows.Forms.TabPage tabPage2;
-        private ListManagement.ListManager trainingManager;
+        private ObjectManagement.ItemListManager trainingManager;
     }
 }
 

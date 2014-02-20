@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 
-using EnterpriseTraining.ListManagement;
+using EnterpriseTraining.ObjectManagement;
 using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItem<T> : IListItem
+    public class EntityItem<T> : IItem
         where T : class
     {
         private readonly IEntityStringizer<T> _entityStringizer;

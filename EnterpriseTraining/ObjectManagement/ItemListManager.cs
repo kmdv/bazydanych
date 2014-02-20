@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace EnterpriseTraining.ListManagement
+namespace EnterpriseTraining.ObjectManagement
 {
-    public partial class ListManager : UserControl
+    public partial class ItemListManager : UserControl
     {
-        private readonly BindingList<IListItem> _bindingList = new BindingList<IListItem>();
+        private readonly BindingList<IItem> _bindingList = new BindingList<IItem>();
 
-        public IListItemFactory ItemFactory { get; set; }
-        public IListItemEditor ItemEditor { get; set; }
-        public IListItemSaver ItemSaver { get; set; }
-        public IListItemRemover ItemRemover { get; set; }
+        public IItemFactory ItemFactory { get; set; }
+        public IItemEditor ItemEditor { get; set; }
+        public IItemSaver ItemSaver { get; set; }
+        public IItemRemover ItemRemover { get; set; }
 
-        public ListManager()
+        public ItemListManager()
         {
-            ItemFactory = new NullListItemFactory();
-            ItemEditor = new NullListItemEditor();
+            ItemFactory = new NullItemFactory();
+            ItemEditor = new NullItemEditor();
             ItemSaver = new NullListItemSaver();
-            ItemRemover = new NullListItemRemover();
+            ItemRemover = new NullItemRemover();
 
             InitializeComponent();
 
@@ -38,7 +38,7 @@ namespace EnterpriseTraining.ListManagement
         {
             var newItem = ItemFactory.CreateNew();
 
-            if (ItemEditor.Edit(newItem) == ListItemEditResult.Success)
+            if (ItemEditor.Edit(newItem) == ItemEditResult.Success)
             {
                 ItemSaver.SaveNew(newItem);
                 _bindingList.Add(newItem);
@@ -70,25 +70,25 @@ namespace EnterpriseTraining.ListManagement
             {
                 var item = _bindingList[listBox.SelectedIndex];
                 
-                if (ItemEditor.Edit(item) == ListItemEditResult.Success)
+                if (ItemEditor.Edit(item) == ItemEditResult.Success)
                 {
                     ItemSaver.SaveExisting(item);
                 }
             }
         }
 
-        private IList<IListItem> GetSelectedItems()
+        private IList<IItem> GetSelectedItems()
         {
-            var selectedItems = new List<IListItem>();
+            var selectedItems = new List<IItem>();
             foreach (var item in listBox.SelectedItems)
             {
-                selectedItems.Add((IListItem)item);
+                selectedItems.Add((IItem)item);
             }
 
             return selectedItems;
         }
 
-        private void RemoveItems(IEnumerable<IListItem> items)
+        private void RemoveItems(IEnumerable<IItem> items)
         {
             foreach (var item in items)
             {

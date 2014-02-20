@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-using EnterpriseTraining.ListManagement;
+using EnterpriseTraining.ObjectManagement;
 using EnterpriseTraining.Sql;
 using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemRemover<T> : IListItemRemover
+    public class EntityItemRemover<T> : IItemRemover
         where T : class
     {
         private readonly ISqlConnectionFactory _connectionFactory;
@@ -19,7 +19,7 @@ namespace EnterpriseTraining.EntityManagement
             _entityRemover = entityRemover;
         }
 
-        public void Remove(IEnumerable<IListItem> listItems)
+        public void Remove(IEnumerable<IItem> listItems)
         {
             using (var connection = _connectionFactory.Create())
             {
@@ -27,7 +27,7 @@ namespace EnterpriseTraining.EntityManagement
             }
         }
 
-        private IList<T> GetEntities(IEnumerable<IListItem> listItems)
+        private IList<T> GetEntities(IEnumerable<IItem> listItems)
         {
             var entities = new List<T>();
             foreach (var listItem in listItems)

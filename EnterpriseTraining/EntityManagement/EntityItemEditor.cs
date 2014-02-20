@@ -1,10 +1,10 @@
 ﻿using System.Windows.Forms;
 
-using EnterpriseTraining.ListManagement;
+using EnterpriseTraining.ObjectManagement;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemEditor<T, TForm> : IListItemEditor
+    public class EntityItemEditor<T, TForm> : IItemEditor
         where T : class
         where TForm : Form, IEntityEditForm<T>
     {
@@ -18,7 +18,7 @@ namespace EnterpriseTraining.EntityManagement
             _owner = owner;
         }
 
-        public ListItemEditResult Edit(IListItem listItem)
+        public ItemEditResult Edit(IItem listItem)
         {
             var userItem = (EntityItem<T>)listItem;
 
@@ -28,10 +28,10 @@ namespace EnterpriseTraining.EntityManagement
             if (_editForm.ShowDialog(_owner) == DialogResult.OK)
             {
                 userItem.Entity = _editForm.Entity;
-                return ListItemEditResult.Success;
+                return ItemEditResult.Success;
             }
 
-            return ListItemEditResult.Cancelled;
+            return ItemEditResult.Cancelled;
         }
     }
 }

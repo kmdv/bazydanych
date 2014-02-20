@@ -1,6 +1,6 @@
-﻿namespace EnterpriseTraining.ListManagement
+﻿namespace EnterpriseTraining.ObjectManagement
 {
-    partial class ListManager
+    partial class ItemListManager
     {
         /// <summary> 
         /// Required designer variable.
