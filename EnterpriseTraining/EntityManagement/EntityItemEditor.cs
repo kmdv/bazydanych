@@ -5,6 +5,7 @@ using EnterpriseTraining.ListManagement;
 namespace EnterpriseTraining.EntityManagement
 {
     public class EntityItemEditor<T, TForm> : IListItemEditor
+        where T : class
         where TForm : Form, IEntityEditForm<T>
     {
         private readonly TForm _editForm;

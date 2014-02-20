@@ -7,27 +7,32 @@ using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemFactory<T> : IListItemFactory
+    public class EntityItemFactory<T> : IListItemFactory 
+        where T : class
     {
         private readonly ISqlConnectionFactory _connectionFactory;
 
         private readonly IEntityLoader<T> _entityLoader;
+
+        private readonly IEntityFactory<T> _entityFactory;
 
         private readonly IEntityNameFactory<T> _entityNameFactory;
 
         public EntityItemFactory(
             ISqlConnectionFactory connectionFactory,
             IEntityLoader<T> entityLoader,
+            IEntityFactory<T> entityFactory,
             IEntityNameFactory<T> entityNameFactory)
         {
             _connectionFactory = connectionFactory;
             _entityLoader = entityLoader;
+            _entityFactory = entityFactory;
             _entityNameFactory = entityNameFactory;
         }
 
         public IListItem CreateNew()
         {
-            return new EntityItem<T>(_entityNameFactory);
+            return new EntityItem<T>(_entityNameFactory) { Entity = _entityFactory.CreateNew() };
         }
 
         public IList<IListItem> CreateFullList()

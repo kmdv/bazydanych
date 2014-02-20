@@ -2,7 +2,7 @@
 
 namespace EnterpriseTraining.Entities
 {
-    public struct Training
+    public class Training
     {
         internal int Id { get; set; }
 

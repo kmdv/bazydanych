@@ -6,10 +6,11 @@ using EnterpriseTraining.Entities;
 namespace EnterpriseTraining.EntityManagement
 {
     public class EntityItem<T> : IListItem
+        where T : class
     {
         private readonly IEntityNameFactory<T> _entityNameFactory;
 
-        private T _entity = default(T);
+        private T _entity = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

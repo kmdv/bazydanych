@@ -4,7 +4,8 @@ using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemSaver<T> : IListItemSaver
+    public class EntityItemSaver<T> : IListItemSaver 
+        where T : class
     {
         private readonly ISqlConnectionFactory _connectionFactory;
 
@@ -20,9 +21,7 @@ namespace EnterpriseTraining.EntityManagement
         {
             using (var connection = _connectionFactory.Create())
             {
-                var entityItem = (EntityItem<T>)listItem;
-
-                entityItem.Entity = _entitySaver.SaveNew(connection, entityItem.Entity);
+                _entitySaver.SaveNew(connection, ((EntityItem<T>)listItem).Entity);
             }
         }
 

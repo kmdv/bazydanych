@@ -7,6 +7,7 @@ using EnterpriseTraining.Entities;
 namespace EnterpriseTraining.EntityManagement
 {
     public class EntityItemRemover<T> : IListItemRemover
+        where T : class
     {
         private readonly ISqlConnectionFactory _connectionFactory;
 

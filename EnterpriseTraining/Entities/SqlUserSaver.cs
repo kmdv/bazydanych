@@ -25,7 +25,7 @@ namespace EnterpriseTraining.Entities
             "PostCode=@PostCode " +
             "WHERE UserId=@Id";
 
-        public User SaveNew(SqlConnection connection, User user)
+        public void SaveNew(SqlConnection connection, User user)
         {
             using (var command = new SqlCommand(InsertStatement, connection))
             {
@@ -37,7 +37,7 @@ namespace EnterpriseTraining.Entities
 
                 command.ExecuteNonQuery();
 
-                return UpdateId(command, user);
+                SetNewId(command, user);
             }
         }
 
@@ -80,11 +80,9 @@ namespace EnterpriseTraining.Entities
             }
         }
 
-        private User UpdateId(SqlCommand command, User user)
+        private void SetNewId(SqlCommand command, User user)
         {
-            User newUser = user;
-            newUser.Id = (int)command.Parameters["@Id"].Value;
-            return newUser;
+            user.Id = (int)command.Parameters["@Id"].Value;
         }
     }
 }

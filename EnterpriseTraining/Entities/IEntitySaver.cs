@@ -2,9 +2,10 @@
 
 namespace EnterpriseTraining.Entities
 {
-    public interface IEntitySaver<T>
+    public interface IEntitySaver<T> 
+        where T : class
     {
-        T SaveNew(SqlConnection connection, T entity);
+        void SaveNew(SqlConnection connection, T entity);
 
         void SaveExisting(SqlConnection connection, T entity);
     }
