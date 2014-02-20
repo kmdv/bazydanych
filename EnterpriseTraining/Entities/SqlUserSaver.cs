@@ -4,14 +4,14 @@ using System.Data.SqlClient;
 
 namespace EnterpriseTraining.Entities
 {
-    public class DefaultEntitySaver : IEntitySaver
+    public class SqlUserSaver : IEntitySaver<User>
     {
-        private const string InsertUserCommand =
+        private const string InsertStatement =
             "INSERT INTO Users (FirstName, LastName, BirthDate, EmailAddress, Country, City, Street, HouseNumber, FlatNumber, PostCode) " +
             "VALUES (@FirstName, @LastName, @BirthDate, @EmailAddress, @Country, @City, @Street, @HouseNumber, @FlatNumber, @PostCode)" +
             "SET @Id = SCOPE_IDENTITY()";
 
-        private const string UpdateUserCommand =
+        private const string UpdateStatement =
             "UPDATE Users SET " +
             "FirstName=@FirstName, " +
             "LastName=@LastName, " +
@@ -25,11 +25,11 @@ namespace EnterpriseTraining.Entities
             "PostCode=@PostCode " +
             "WHERE UserId=@Id";
 
-        public User SaveNewUser(SqlConnection connection, User user)
+        public User SaveNew(SqlConnection connection, User user)
         {
-            using (var command = new SqlCommand(InsertUserCommand, connection))
+            using (var command = new SqlCommand(InsertStatement, connection))
             {
-                AddCommonUserFields(command, user);
+                AddCommonFields(command, user);
 
                 command.Parameters.Add("@Id", SqlDbType.Int, 0, "UserId").Direction = ParameterDirection.Output;
 
@@ -37,15 +37,15 @@ namespace EnterpriseTraining.Entities
 
                 command.ExecuteNonQuery();
 
-                return UpdateUserId(command, user);
+                return UpdateId(command, user);
             }
         }
 
-        public void SaveExistingUser(SqlConnection connection, User user)
+        public void SaveExisting(SqlConnection connection, User user)
         {
-            using (var command = new SqlCommand(UpdateUserCommand, connection))
+            using (var command = new SqlCommand(UpdateStatement, connection))
             {
-                AddCommonUserFields(command, user);
+                AddCommonFields(command, user);
                 
                 command.Parameters.Add(new SqlParameter("@Id", user.Id));
 
@@ -55,7 +55,7 @@ namespace EnterpriseTraining.Entities
             }
         }
 
-        private void AddCommonUserFields(SqlCommand command, User user)
+        private void AddCommonFields(SqlCommand command, User user)
         {
             command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
             command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
@@ -80,7 +80,7 @@ namespace EnterpriseTraining.Entities
             }
         }
 
-        private User UpdateUserId(SqlCommand command, User user)
+        private User UpdateId(SqlCommand command, User user)
         {
             User newUser = user;
             newUser.Id = (int)command.Parameters["@Id"].Value;

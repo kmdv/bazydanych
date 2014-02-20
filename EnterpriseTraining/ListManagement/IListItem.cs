@@ -1,6 +1,8 @@
-﻿namespace EnterpriseTraining.ListManagement
+﻿using System.ComponentModel;
+
+namespace EnterpriseTraining.ListManagement
 {
-    public interface IListItem
+    public interface IListItem : INotifyPropertyChanged
     {
     }
 }

@@ -1,14 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace EnterpriseTraining.Entities
 {
-    public class DefaultEntityLoader : IEntityLoader
+    public class SqlUserLoader : IEntityLoader<User>
     {
-        public User LoadUser(SqlDataReader reader)
+        private const string SelectStatement = "SELECT * FROM Users";
+
+        public IList<User> LoadAll(SqlConnection connection)
+        {
+            using (var command = new SqlCommand(SelectStatement, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    var list = new List<User>();
+                    while (reader.Read())
+                    {
+                        list.Add(ReadRow(reader));
+                    }
+
+                    return list;
+                }
+            }
+        }
+
+        public User ReadRow(SqlDataReader reader)
         {
             return new User
             {

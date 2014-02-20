@@ -1,9 +1,10 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace EnterpriseTraining.Entities
 {
-    public interface IEntityLoader
+    public interface IEntityLoader<T>
     {
-        User LoadUser(SqlDataReader reader);
+        IList<T> LoadAll(SqlConnection connection);
     }
 }

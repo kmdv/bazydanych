@@ -2,10 +2,10 @@
 
 namespace EnterpriseTraining.Entities
 {
-    public interface IEntitySaver
+    public interface IEntitySaver<T>
     {
-        User SaveNewUser(SqlConnection connection, User user);
+        T SaveNew(SqlConnection connection, T entity);
 
-        void SaveExistingUser(SqlConnection connection, User user);
+        void SaveExisting(SqlConnection connection, T entity);
     }
 }

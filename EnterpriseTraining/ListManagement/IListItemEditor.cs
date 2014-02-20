@@ -2,6 +2,6 @@
 {
     public interface IListItemEditor
     {
-        ListItemEditResult Edit(IListItem item);
+        ListItemEditResult Edit(IListItem listItem);
     }
 }

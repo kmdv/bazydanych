@@ -16,7 +16,14 @@ namespace EnterpriseTraining.ListManagement
 
         public ListManager()
         {
+            ItemFactory = new NullListItemFactory();
+            ItemEditor = new NullListItemEditor();
+            ItemSaver = new NullListItemSaver();
+            ItemRemover = new NullListItemRemover();
+
             InitializeComponent();
+
+            listBox.DataSource = _bindingList;
         }
 
         private void ListManager_Load(object sender, EventArgs e)

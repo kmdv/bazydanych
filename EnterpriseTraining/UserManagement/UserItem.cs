@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 
 using EnterpriseTraining.Entities;
+using EnterpriseTraining.ListManagement;
 
-namespace EnterpriseTraining
+namespace EnterpriseTraining.UserManagement
 {
-    public sealed class UserListBoxItem : INotifyPropertyChanged
+    public sealed class UserItem : IListItem
     {
         private const string FullNameFormat = "{0} {1}";
 
@@ -18,6 +19,7 @@ namespace EnterpriseTraining
             {
                 return _user;
             }
+
             set
             {
                 _user = value;

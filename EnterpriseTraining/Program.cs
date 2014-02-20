@@ -16,15 +16,12 @@ namespace EnterpriseTraining
         [STAThread]
         static void Main()
         {
-            var sqlContext = new DefaultSqlContext(ConnectionString);
-            var entitySaver = new DefaultEntitySaver();
-            var entityLoader = new DefaultEntityLoader();
-            var entityRemover = new DefaultEntityRemover();
+            var sqlConnectionFactory = new DefaultSqlConnectionFactory(ConnectionString);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var mainForm = new MainForm(sqlContext, entityLoader, entitySaver, entityRemover);
+            var mainForm = new MainForm(sqlConnectionFactory);
 
             Application.Run(mainForm);
         }

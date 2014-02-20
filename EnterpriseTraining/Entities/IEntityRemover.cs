@@ -5,6 +5,6 @@ namespace EnterpriseTraining.Entities
 {
     public interface IEntityRemover
     {
-        void RemoveUsers(SqlConnection connection, IEnumerable<int> ids);
+        void Remove(SqlConnection connection, IEnumerable<int> ids);
     }
 }
