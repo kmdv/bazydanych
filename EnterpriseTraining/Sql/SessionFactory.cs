@@ -2,23 +2,24 @@
 
 namespace EnterpriseTraining.Sql
 {
-    public class DefaultSqlConnectionFactory : ISqlConnectionFactory
+    public class SessionFactory : ISessionFactory
     {
         public string ConnectionString { get; private set; }
 
-        public DefaultSqlConnectionFactory(string connectionString)
+        public SessionFactory(string connectionString)
         {
             ConnectionString = connectionString;
         }
 
-        public SqlConnection Create()
+        public ISession Create()
         {
             var connection = new SqlConnection(ConnectionString);
 
             try
             {
                 connection.Open();
-                return connection;
+
+                return new Session(connection);
             }
             catch
             {

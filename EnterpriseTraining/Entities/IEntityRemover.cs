@@ -1,11 +1,12 @@
-﻿using System.Data.SqlClient;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities
 {
-    public interface IEntityRemover<T> 
-        where T : class
+    public interface IEntityRemover<T>
+        where T : class, IEntity
     {
-        void Remove(SqlConnection connection, IEnumerable<T> entities);
+        void Remove(ISession session, IEnumerable<T> entities);
     }
 }

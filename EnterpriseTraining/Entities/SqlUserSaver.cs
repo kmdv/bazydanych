@@ -2,9 +2,11 @@
 using System.Data;
 using System.Data.SqlClient;
 
+using EnterpriseTraining.Sql;
+
 namespace EnterpriseTraining.Entities
 {
-    public class SqlUserSaver : IEntitySaver<User>
+    public sealed class SqlUserSaver : IEntitySaver<User>
     {
         private const string InsertStatement =
             "INSERT INTO Users (FirstName, LastName, BirthDate, EmailAddress, Country, City, Street, HouseNumber, FlatNumber, PostCode) " +
@@ -25,9 +27,9 @@ namespace EnterpriseTraining.Entities
             "PostCode=@PostCode " +
             "WHERE UserId=@Id";
 
-        public void SaveNew(SqlConnection connection, User user)
+        public void SaveNew(ISession session, User user)
         {
-            using (var command = new SqlCommand(InsertStatement, connection))
+            using (var command = session.CreateCommand(InsertStatement))
             {
                 AddCommonFields(command, user);
 
@@ -41,9 +43,9 @@ namespace EnterpriseTraining.Entities
             }
         }
 
-        public void SaveExisting(SqlConnection connection, User user)
+        public void SaveExisting(ISession session, User user)
         {
-            using (var command = new SqlCommand(UpdateStatement, connection))
+            using (var command = session.CreateCommand(UpdateStatement))
             {
                 AddCommonFields(command, user);
                 

@@ -1,6 +1,6 @@
 ﻿namespace EnterpriseTraining.Entities
 {
-    public sealed class Certificate
+    public sealed class Certificate : IEntity
     {
         public Certificate()
         {
@@ -8,7 +8,7 @@
             Name = string.Empty;
         }
 
-        internal int Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
     }

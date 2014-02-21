@@ -6,16 +6,16 @@ using EnterpriseTraining.EntityManagement;
 
 namespace EnterpriseTraining
 {
-    public partial class EditTrainingForm : Form, IEntityEditForm<User>
+    public partial class EditTrainingForm : Form, IEntityEditForm<Training>
     {
         private const string IntFormat = "{0:d}";
 
-        private User _user = new User();
+        private Training _training = new Training();
 
-        public User Entity
+        public Training Entity
         {
-            get { return _user; }
-            set { _user = value; }
+            get { return _training; }
+            set { _training = value; }
         }
 
         public EditTrainingForm()
@@ -25,70 +25,44 @@ namespace EnterpriseTraining
 
         private void EditUser_Shown(object sender, EventArgs e)
         {
-            nameTextBox.Text = GetOptional(_user.FirstName);
-            descriptionTextBox.Text = GetOptional(_user.LastName);
-            startDatePicker.Value = GetConstrained(_user.BirthDate);
-            countryTextBox.Text = GetOptional(_user.Country);
-            cityTextBox.Text = GetOptional(_user.City);
-            streetTextBox.Text = GetOptional(_user.Street);
-            houseNumberTextBox.Text = GetOptional(_user.HouseNumber);
-            flatNumberTextBox.Text = GetOptional(_user.FlatNumber);
-            postCodeTextBox.Text = GetOptional(_user.PostCode);
+            nameTextBox.Text = _training.Name;
+            descriptionTextBox.Text = _training.Description;
+            startDatePicker.Value = GetConstrained(_training.StartDate, startDatePicker);
+            endDatePicker.Value = GetConstrained(_training.EndDate, endDatePicker);
+            costTextBox.Text = string.Format(IntFormat, _training.Cost);
+            requiredPointsTextBox.Text = string.Format(IntFormat, _training.RequiredPoints);
+            maxPointsTextBox.Text = string.Format(IntFormat, _training.MaxPoints);
         }
 
-        private DateTime GetConstrained(DateTime dateTime)
+        private DateTime GetConstrained(DateTime dateTime, DateTimePicker picker)
         {
             if (dateTime == new DateTime())
             {
                 return DateTime.Now;
             }
 
-            if (dateTime < startDatePicker.MinDate)
+            if (dateTime < picker.MinDate)
             {
-                return startDatePicker.MinDate;
+                return picker.MinDate;
             }
 
-            if (dateTime > startDatePicker.MaxDate)
+            if (dateTime > picker.MaxDate)
             {
-                return startDatePicker.MaxDate;
+                return picker.MaxDate;
             }
 
             return dateTime;
         }
 
-        private string GetOptional(string value)
-        {
-            return value == null ? string.Empty : value;
-        }
-
-        private string GetOptional(int? value)
-        {
-            return value == null ? string.Empty : string.Format(IntFormat, value);
-        }
-
-        private string ToOptionalString(string value)
-        {
-            return string.IsNullOrEmpty(value) ? null : value;
-        }
-
-        private int? ToOptionalInt(string value)
-        {
-            return string.IsNullOrEmpty(value)
-                ? null as int?
-                : int.Parse(value);
-        }
-
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            _user.FirstName = ToOptionalString(nameTextBox.Text);
-            _user.LastName = ToOptionalString(descriptionTextBox.Text);
-            _user.BirthDate = startDatePicker.Value;
-            _user.Country = ToOptionalString(countryTextBox.Text);
-            _user.City = ToOptionalString(cityTextBox.Text);
-            _user.Street = ToOptionalString(streetTextBox.Text);
-            _user.HouseNumber = ToOptionalInt(houseNumberTextBox.Text);
-            _user.FlatNumber = ToOptionalInt(flatNumberTextBox.Text);
-            _user.PostCode = ToOptionalString(postCodeTextBox.Text);
+            _training.Name = nameTextBox.Text;
+            _training.Description = descriptionTextBox.Text;
+            _training.StartDate = startDatePicker.Value;
+            _training.EndDate = endDatePicker.Value;
+            _training.Cost = decimal.Parse(costTextBox.Text);
+            _training.RequiredPoints = int.Parse(costTextBox.Text);
+            _training.MaxPoints = int.Parse(costTextBox.Text);
         }
     }
 }

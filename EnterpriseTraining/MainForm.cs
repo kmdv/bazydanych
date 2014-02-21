@@ -10,30 +10,24 @@ namespace EnterpriseTraining
     {
         private readonly EditUserForm _editUserForm = new EditUserForm();
 
-        public MainForm(ISqlConnectionFactory connectionFactory)
+        public MainForm(ISessionFactory sessionFactory)
         {
             InitializeComponent();
 
-            var userLoader = new SqlUserLoader();
+            var optionalCellReader = new OptionalCellReader();
+            var sqlIdListStringizer = new IdListStringizer();
+
+            var userLoader = new SqlUserLoader(optionalCellReader);
             var userSaver = new SqlUserSaver();
-            var userRemover = new SqlUserRemover();
+            var userRemover = new SqlUserRemover(sqlIdListStringizer);
             var userFactory = new DefaultUserFactory();
 
             var userNameFactory = new UserStringizer();
 
             userManager.ItemEditor = new EntityItemEditor<User, EditUserForm>(_editUserForm, this);
-            userManager.ItemFactory = new EntityItemFactory<User>(connectionFactory, userLoader, userFactory, userNameFactory);
-            userManager.ItemSaver = new EntityItemSaver<User>(connectionFactory, userSaver);
-            userManager.ItemRemover = new EntityItemRemover<User>(connectionFactory, userRemover);
-
-            /*var userLoader = new SqlUserLoader();
-            var userSaver = new SqlUserSaver();
-            var userRemover = new SqlEntityRemover("Users", "UserId");
-
-            userManager.ItemEditor = new UserItemEditor(_editUserForm, this);
-            userManager.ItemFactory = new UserItemFactory(connectionFactory, userLoader);
-            userManager.ItemSaver = new UserItemSaver(connectionFactory, userSaver);
-            userManager.ItemRemover = new UserItemRemover(connectionFactory, userRemover);*/
+            userManager.ItemFactory = new EntityItemFactory<User>(sessionFactory, userLoader, userFactory, userNameFactory);
+            userManager.ItemSaver = new EntityItemSaver<User>(sessionFactory, userSaver);
+            userManager.ItemRemover = new EntityItemRemover<User>(sessionFactory, userRemover);
         }
     }
 }

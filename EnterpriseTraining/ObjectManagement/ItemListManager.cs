@@ -18,7 +18,7 @@ namespace EnterpriseTraining.ObjectManagement
         {
             ItemFactory = new NullItemFactory();
             ItemEditor = new NullItemEditor();
-            ItemSaver = new NullListItemSaver();
+            ItemSaver = new NullItemSaver();
             ItemRemover = new NullItemRemover();
 
             InitializeComponent();

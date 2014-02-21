@@ -4,6 +4,6 @@ namespace EnterpriseTraining.ObjectManagement
 {
     public interface IItemRemover
     {
-        void Remove(IEnumerable<IItem> listItems);
+        void Remove(IEnumerable<IItem> items);
     }
 }

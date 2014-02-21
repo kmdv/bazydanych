@@ -7,10 +7,10 @@ using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining.EntityManagement
 {
-    public class EntityItemFactory<T> : IItemFactory 
-        where T : class
+    public class EntityItemFactory<T> : IItemFactory
+        where T : class, IEntity
     {
-        private readonly ISqlConnectionFactory _connectionFactory;
+        private readonly ISessionFactory _sessionFactory;
 
         private readonly IEntityLoader<T> _entityLoader;
 
@@ -19,12 +19,12 @@ namespace EnterpriseTraining.EntityManagement
         private readonly IEntityStringizer<T> _entityNameFactory;
 
         public EntityItemFactory(
-            ISqlConnectionFactory connectionFactory,
+            ISessionFactory sessionFactory,
             IEntityLoader<T> entityLoader,
             IEntityFactory<T> entityFactory,
             IEntityStringizer<T> entityNameFactory)
         {
-            _connectionFactory = connectionFactory;
+            _sessionFactory = sessionFactory;
             _entityLoader = entityLoader;
             _entityFactory = entityFactory;
             _entityNameFactory = entityNameFactory;
@@ -37,10 +37,10 @@ namespace EnterpriseTraining.EntityManagement
 
         public IList<IItem> CreateFullList()
         {
-            using (var connection = _connectionFactory.Create())
+            using (var session = _sessionFactory.Create())
             {
                 var list = new List<IItem>();
-                foreach (var entity in _entityLoader.LoadAll(connection))
+                foreach (var entity in _entityLoader.LoadAll(session))
                 {
                     list.Add(new EntityItem<T>(_entityNameFactory) { Entity = entity });
                 }

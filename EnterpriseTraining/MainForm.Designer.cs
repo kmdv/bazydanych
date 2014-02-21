@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            EnterpriseTraining.ObjectManagement.NullItemEditor nullListItemEditor1 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
-            EnterpriseTraining.ObjectManagement.NullItemFactory nullListItemFactory1 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
-            EnterpriseTraining.ObjectManagement.NullItemRemover nullListItemRemover1 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
-            EnterpriseTraining.ObjectManagement.NullListItemSaver nullListItemSaver1 = new EnterpriseTraining.ObjectManagement.NullListItemSaver();
-            EnterpriseTraining.ObjectManagement.NullItemEditor nullListItemEditor2 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
-            EnterpriseTraining.ObjectManagement.NullItemFactory nullListItemFactory2 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
-            EnterpriseTraining.ObjectManagement.NullItemRemover nullListItemRemover2 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
-            EnterpriseTraining.ObjectManagement.NullListItemSaver nullListItemSaver2 = new EnterpriseTraining.ObjectManagement.NullListItemSaver();
+            EnterpriseTraining.ObjectManagement.NullItemEditor nullItemEditor1 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
+            EnterpriseTraining.ObjectManagement.NullItemFactory nullItemFactory1 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
+            EnterpriseTraining.ObjectManagement.NullItemRemover nullItemRemover1 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
+            EnterpriseTraining.ObjectManagement.NullItemSaver nullItemSaver1 = new EnterpriseTraining.ObjectManagement.NullItemSaver();
+            EnterpriseTraining.ObjectManagement.NullItemEditor nullItemEditor2 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
+            EnterpriseTraining.ObjectManagement.NullItemFactory nullItemFactory2 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
+            EnterpriseTraining.ObjectManagement.NullItemRemover nullItemRemover2 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
+            EnterpriseTraining.ObjectManagement.NullItemSaver nullItemSaver2 = new EnterpriseTraining.ObjectManagement.NullItemSaver();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.userManager = new EnterpriseTraining.ObjectManagement.ItemListManager();
@@ -71,10 +71,10 @@
             // userManager
             // 
             this.userManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userManager.ItemEditor = nullListItemEditor1;
-            this.userManager.ItemFactory = nullListItemFactory1;
-            this.userManager.ItemRemover = nullListItemRemover1;
-            this.userManager.ItemSaver = nullListItemSaver1;
+            this.userManager.ItemEditor = nullItemEditor1;
+            this.userManager.ItemFactory = nullItemFactory1;
+            this.userManager.ItemRemover = nullItemRemover1;
+            this.userManager.ItemSaver = nullItemSaver1;
             this.userManager.Location = new System.Drawing.Point(3, 3);
             this.userManager.Name = "userManager";
             this.userManager.Size = new System.Drawing.Size(514, 357);
@@ -94,10 +94,10 @@
             // trainingManager
             // 
             this.trainingManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trainingManager.ItemEditor = nullListItemEditor2;
-            this.trainingManager.ItemFactory = nullListItemFactory2;
-            this.trainingManager.ItemRemover = nullListItemRemover2;
-            this.trainingManager.ItemSaver = nullListItemSaver2;
+            this.trainingManager.ItemEditor = nullItemEditor2;
+            this.trainingManager.ItemFactory = nullItemFactory2;
+            this.trainingManager.ItemRemover = nullItemRemover2;
+            this.trainingManager.ItemSaver = nullItemSaver2;
             this.trainingManager.Location = new System.Drawing.Point(3, 3);
             this.trainingManager.Name = "trainingManager";
             this.trainingManager.Size = new System.Drawing.Size(514, 357);
@@ -110,7 +110,7 @@
             this.ClientSize = new System.Drawing.Size(528, 392);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Enterprise Training";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EnterpriseTraining.Entities
 {
-    public sealed class Training
+    public sealed class Training : IEntity
     {
         public Training()
         {
@@ -16,7 +16,7 @@ namespace EnterpriseTraining.Entities
             Trainees = new List<User>();
         }
 
-        internal int Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

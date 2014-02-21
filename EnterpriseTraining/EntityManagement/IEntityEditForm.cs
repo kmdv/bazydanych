@@ -1,7 +1,9 @@
-﻿namespace EnterpriseTraining.EntityManagement
+﻿using EnterpriseTraining.Entities;
+
+namespace EnterpriseTraining.EntityManagement
 {
     public interface IEntityEditForm<T>
-        where T : class
+        where T : class, IEntity
     {
         T Entity { get; set; }
     }

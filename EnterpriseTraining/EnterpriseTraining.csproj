@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditTrainingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditTrainingForm.Designer.cs">
+      <DependentUpon>EditTrainingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +59,12 @@
       <DependentUpon>EditUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Certificate.cs" />
+    <Compile Include="Entities\Trainer.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Sql\IIdListStringizer.cs" />
+    <Compile Include="Sql\IdListStringizer.cs" />
+    <Compile Include="Sql\IOptionalCellReader.cs" />
+    <Compile Include="Sql\OptionalCellReader.cs" />
     <Compile Include="Entities\DefaultUserFactory.cs" />
     <Compile Include="Entities\IEntityFactory.cs" />
     <Compile Include="Entities\SqlUserLoader.cs" />
@@ -63,6 +75,7 @@
     <Compile Include="Entities\IEntitySaver.cs" />
     <Compile Include="Entities\Training.cs" />
     <Compile Include="EntityManagement\CertificateStringizer.cs" />
+    <Compile Include="Entities\Trainee.cs" />
     <Compile Include="EntityManagement\TrainingStringizer.cs" />
     <Compile Include="EntityManagement\EntityItem.cs" />
     <Compile Include="EntityManagement\IEntityEditForm.cs" />
@@ -72,6 +85,12 @@
     <Compile Include="ObjectManagement\IItem.cs" />
     <Compile Include="ObjectManagement\IItemFactory.cs" />
     <Compile Include="ObjectManagement\IItemSaver.cs" />
+    <Compile Include="ObjectManagement\ItemDropDownList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ObjectManagement\ItemDropDownList.Designer.cs">
+      <DependentUpon>ItemDropDownList.cs</DependentUpon>
+    </Compile>
     <Compile Include="ObjectManagement\ItemEditResult.cs" />
     <Compile Include="ObjectManagement\ItemListManager.cs">
       <SubType>UserControl</SubType>
@@ -79,13 +98,14 @@
     <Compile Include="ObjectManagement\ItemListManager.Designer.cs">
       <DependentUpon>ItemListManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObjectManagement\NoneItem.cs" />
     <Compile Include="ObjectManagement\NullItemEditor.cs" />
     <Compile Include="ObjectManagement\NullItemFactory.cs" />
     <Compile Include="ObjectManagement\NullItemRemover.cs" />
     <Compile Include="ObjectManagement\NullListItemSaver.cs" />
-    <Compile Include="Sql\DefaultSqlConnectionFactory.cs" />
+    <Compile Include="Sql\SessionFactory.cs" />
     <Compile Include="ObjectManagement\IItemEditor.cs" />
-    <Compile Include="Sql\ISqlConnectionFactory.cs" />
+    <Compile Include="Sql\ISessionFactory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,8 +119,16 @@
     <Compile Include="EntityManagement\EntityItemEditor.cs" />
     <Compile Include="EntityManagement\EntityItemRemover.cs" />
     <Compile Include="EntityManagement\EntityItemSaver.cs" />
+    <Compile Include="Sql\ISession.cs" />
+    <Compile Include="Sql\Session.cs" />
+    <EmbeddedResource Include="EditTrainingForm.resx">
+      <DependentUpon>EditTrainingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditUserForm.resx">
       <DependentUpon>EditUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectManagement\ItemDropDownList.resx">
+      <DependentUpon>ItemDropDownList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ObjectManagement\ItemListManager.resx">
       <DependentUpon>ItemListManager.cs</DependentUpon>

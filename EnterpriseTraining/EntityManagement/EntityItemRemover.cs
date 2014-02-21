@@ -7,32 +7,34 @@ using EnterpriseTraining.Entities;
 namespace EnterpriseTraining.EntityManagement
 {
     public class EntityItemRemover<T> : IItemRemover
-        where T : class
+        where T : class, IEntity
     {
-        private readonly ISqlConnectionFactory _connectionFactory;
+        private readonly ISessionFactory _sessionFactory;
 
         private readonly IEntityRemover<T> _entityRemover;
 
-        public EntityItemRemover(ISqlConnectionFactory connectionFactory, IEntityRemover<T> entityRemover)
+        public EntityItemRemover(ISessionFactory sessionFactory, IEntityRemover<T> entityRemover)
         {
-            _connectionFactory = connectionFactory;
+            _sessionFactory = sessionFactory;
             _entityRemover = entityRemover;
         }
 
-        public void Remove(IEnumerable<IItem> listItems)
+        public void Remove(IEnumerable<IItem> item)
         {
-            using (var connection = _connectionFactory.Create())
+            using (var session = _sessionFactory.Create())
             {
-                _entityRemover.Remove(connection, GetEntities(listItems));
+                _entityRemover.Remove(session, GetEntities(item));
+
+                session.FlushChanges();
             }
         }
 
-        private IList<T> GetEntities(IEnumerable<IItem> listItems)
+        private IList<T> GetEntities(IEnumerable<IItem> items)
         {
             var entities = new List<T>();
-            foreach (var listItem in listItems)
+            foreach (var item in items)
             {
-                entities.Add(((EntityItem<T>)listItem).Entity);
+                entities.Add(((EntityItem<T>)item).Entity);
             }
 
             return entities;

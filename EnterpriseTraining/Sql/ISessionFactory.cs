@@ -2,8 +2,8 @@
 
 namespace EnterpriseTraining.Sql
 {
-    public interface ISqlConnectionFactory
+    public interface ISessionFactory
     {
-        SqlConnection Create();
+        ISession Create();
     }
 }

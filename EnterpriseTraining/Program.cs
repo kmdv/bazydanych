@@ -16,7 +16,7 @@ namespace EnterpriseTraining
         [STAThread]
         static void Main()
         {
-            var sqlConnectionFactory = new DefaultSqlConnectionFactory(ConnectionString);
+            var sqlConnectionFactory = new SessionFactory(ConnectionString);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -2,8 +2,8 @@
 {
     public interface IItemSaver
     {
-        void SaveNew(IItem listItem);
+        void SaveNew(IItem item);
 
-        void SaveExisting(IItem listItem);
+        void SaveExisting(IItem item);
     }
 }

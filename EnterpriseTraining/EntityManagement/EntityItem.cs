@@ -6,7 +6,7 @@ using EnterpriseTraining.Entities;
 namespace EnterpriseTraining.EntityManagement
 {
     public class EntityItem<T> : IItem
-        where T : class
+        where T : class, IEntity
     {
         private readonly IEntityStringizer<T> _entityStringizer;
 

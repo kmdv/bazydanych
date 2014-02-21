@@ -2,7 +2,7 @@
 
 namespace EnterpriseTraining.Entities
 {
-    public sealed class User
+    public sealed class User : IEntity
     {
         public User()
         {
@@ -10,7 +10,7 @@ namespace EnterpriseTraining.Entities
             BirthDate = DateTime.Now;
         }
 
-        internal int Id { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

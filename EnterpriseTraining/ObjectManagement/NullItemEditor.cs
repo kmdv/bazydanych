@@ -2,7 +2,7 @@
 {
     public class NullItemEditor : IItemEditor
     {
-        public ItemEditResult Edit(IItem listItem)
+        public ItemEditResult Edit(IItem item)
         {
             return ItemEditResult.Cancelled;
         }

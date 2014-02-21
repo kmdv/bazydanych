@@ -2,6 +2,6 @@
 {
     public interface IItemEditor
     {
-        ItemEditResult Edit(IItem listItem);
+        ItemEditResult Edit(IItem item);
     }
 }

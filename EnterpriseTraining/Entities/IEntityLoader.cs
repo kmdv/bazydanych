@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+
+using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities
 {
     public interface IEntityLoader<T>
-        where T : class
+        where T : class, IEntity
     {
-        IList<T> LoadAll(SqlConnection connection);
+        IList<T> LoadAll(ISession session);
     }
 }

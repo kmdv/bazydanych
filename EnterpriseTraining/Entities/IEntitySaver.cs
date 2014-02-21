@@ -1,12 +1,12 @@
-﻿using System.Data.SqlClient;
+﻿using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities
 {
-    public interface IEntitySaver<T> 
-        where T : class
+    public interface IEntitySaver<T>
+        where T : class, IEntity
     {
-        void SaveNew(SqlConnection connection, T entity);
+        void SaveNew(ISession session, T entity);
 
-        void SaveExisting(SqlConnection connection, T entity);
+        void SaveExisting(ISession session, T entity);
     }
 }

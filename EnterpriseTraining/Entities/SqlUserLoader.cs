@@ -1,15 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
+using EnterpriseTraining.Sql;
+
 namespace EnterpriseTraining.Entities
 {
     public class SqlUserLoader : IEntityLoader<User>
     {
-        private const string SelectStatement = "SELECT * FROM Users";
+        private const string SelectStatement = "SELECT UserId, FirstName, LastName, BirthDate, "
+            + "EmailAddress, Country, City, Street, HouseNumber, FlatNumber, PostCode FROM Users";
 
-        public IList<User> LoadAll(SqlConnection connection)
+        private readonly IOptionalCellReader _optionalCellReader;
+
+        public SqlUserLoader(IOptionalCellReader optionalCellReader)
         {
-            using (var command = new SqlCommand(SelectStatement, connection))
+            _optionalCellReader = optionalCellReader;
+        }
+
+        public IList<User> LoadAll(ISession session)
+        {
+            using (var command = session.CreateQuery(SelectStatement))
             {
                 using (var reader = command.ExecuteReader())
                 {
@@ -29,26 +39,16 @@ namespace EnterpriseTraining.Entities
             return new User
             {
                 Id = reader.GetInt32(0),
-                FirstName = LoadOptionalString(reader, 1),
-                LastName = LoadOptionalString(reader, 2),
+                FirstName = _optionalCellReader.ReadString(reader, 1),
+                LastName = _optionalCellReader.ReadString(reader, 2),
                 BirthDate = reader.GetDateTime(3),
-                EmailAddress = LoadOptionalString(reader, 4),
-                Country = LoadOptionalString(reader, 5),
-                City = LoadOptionalString(reader, 6),
-                Street = LoadOptionalString(reader, 7),
-                HouseNumber = LoadOptionalInt(reader, 8),
-                FlatNumber = LoadOptionalInt(reader, 9)
-            }; 
-        }
-
-        private string LoadOptionalString(SqlDataReader reader, int index)
-        {
-            return reader.IsDBNull(index) ? null : reader.GetString(index);
-        }
-
-        private int? LoadOptionalInt(SqlDataReader reader, int index)
-        {
-            return reader.IsDBNull(index) ? null as int? : reader.GetInt32(index);
+                EmailAddress = _optionalCellReader.ReadString(reader, 4),
+                Country = _optionalCellReader.ReadString(reader, 5),
+                City = _optionalCellReader.ReadString(reader, 6),
+                Street = _optionalCellReader.ReadString(reader, 7),
+                HouseNumber = _optionalCellReader.ReadInt(reader, 8),
+                FlatNumber = _optionalCellReader.ReadInt(reader, 9)
+            };
         }
     }
 }

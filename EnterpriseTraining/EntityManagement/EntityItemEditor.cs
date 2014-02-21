@@ -1,11 +1,12 @@
 ﻿using System.Windows.Forms;
 
+using EnterpriseTraining.Entities;
 using EnterpriseTraining.ObjectManagement;
 
 namespace EnterpriseTraining.EntityManagement
 {
     public class EntityItemEditor<T, TForm> : IItemEditor
-        where T : class
+        where T : class, IEntity
         where TForm : Form, IEntityEditForm<T>
     {
         private readonly TForm _editForm;
@@ -18,9 +19,9 @@ namespace EnterpriseTraining.EntityManagement
             _owner = owner;
         }
 
-        public ItemEditResult Edit(IItem listItem)
+        public ItemEditResult Edit(IItem item)
         {
-            var userItem = (EntityItem<T>)listItem;
+            var userItem = (EntityItem<T>)item;
 
             _editForm.Entity = userItem.Entity;
             _editForm.StartPosition = FormStartPosition.CenterParent;
