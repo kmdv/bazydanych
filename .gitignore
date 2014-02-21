@@ -9,3 +9,4 @@ Database/_ConversionReport_Files/
 *.ldf
 *.mdf
 Database/ConversionLog.xml
+*.odt#
