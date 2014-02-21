@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EnterpriseTraining.Entities
 {
@@ -8,6 +9,7 @@ namespace EnterpriseTraining.Entities
         {
             Id = -1;
             BirthDate = DateTime.Now;
+            Certificates = new List<Certificate>();
         }
 
         public int Id { get; set; }
@@ -27,5 +29,7 @@ namespace EnterpriseTraining.Entities
         public int? FlatNumber { get; set; }
 
         public string PostCode { get; set; }
+
+        public IList<Certificate> Certificates { get; set; }
     }
 }

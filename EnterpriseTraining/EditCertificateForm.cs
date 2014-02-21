@@ -26,6 +26,7 @@ namespace EnterpriseTraining
         private void EditUser_Shown(object sender, EventArgs e)
         {
             nameTextBox.Text = _certificate.Name;
+            ActiveControl = nameTextBox;
         }
 
         private void acceptButton_Click(object sender, EventArgs e)

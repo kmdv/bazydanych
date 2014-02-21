@@ -6,9 +6,10 @@ using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities
 {
-    public sealed class SqlCertificateSaver : IEntitySaver<Certificate>
+    public abstract class AbstractEntitySaver<T> : IEntitySaver<T>
+        where T : class, IEntity
     {
-        private const string InsertStatement =
+        /*private const string InsertStatement =
             "INSERT INTO Certificates (Name) " +
             "VALUES (@Name)" +
             "SET @Id = SCOPE_IDENTITY()";
@@ -16,41 +17,36 @@ namespace EnterpriseTraining.Entities
         private const string UpdateStatement =
             "UPDATE Certificates SET " +
             "Name=@Name " +
-            "WHERE CertificateId=@Id";
+            "WHERE CertificateId=@Id";*/
 
-        public void SaveNew(ISession session, Certificate certificate)
+        public void SaveNew(ISession session, T entity)
         {
             using (var command = session.CreateCommand(InsertStatement))
             {
-                AddCommonFields(command, certificate);
+                AddCommonFields(command, entity);
 
-                command.Parameters.Add("@Id", SqlDbType.Int, 0, "CertificateId").Direction = ParameterDirection.Output;
+                command.Parameters.Add(IdParameterName, SqlDbType.Int, 0, IdColumnName).Direction = ParameterDirection.Output;
 
                 EnableNullValues(command);
 
                 command.ExecuteNonQuery();
 
-                SetNewId(command, certificate);
+                entity.Id = GetNewId(command);
             }
         }
 
-        public void SaveExisting(ISession session, Certificate user)
+        public void SaveExisting(ISession session, T entity)
         {
             using (var command = session.CreateCommand(UpdateStatement))
             {
-                AddCommonFields(command, user);
+                AddCommonFields(command, entity);
                 
-                command.Parameters.Add(new SqlParameter("@Id", user.Id));
+                command.Parameters.Add(new SqlParameter(IdParameterName, entity.Id));
 
                 EnableNullValues(command);
 
                 command.ExecuteNonQuery();
             }
-        }
-
-        private void AddCommonFields(SqlCommand command, Certificate user)
-        {
-            command.Parameters.Add(new SqlParameter("@Name", user.Name));
         }
 
         private void EnableNullValues(SqlCommand command)
@@ -64,9 +60,19 @@ namespace EnterpriseTraining.Entities
             }
         }
 
-        private void SetNewId(SqlCommand command, Certificate user)
+        private int GetNewId(SqlCommand command)
         {
-            user.Id = (int)command.Parameters["@Id"].Value;
+            return (int)command.Parameters[IdParameterName].Value;
         }
+
+        protected abstract string InsertStatement { get; }
+
+        protected abstract string UpdateStatement { get; }
+
+        protected abstract string IdColumnName { get; }
+
+        protected abstract string IdParameterName { get; }
+
+        protected abstract void AddCommonFields(SqlCommand command, T entity);
     }
 }

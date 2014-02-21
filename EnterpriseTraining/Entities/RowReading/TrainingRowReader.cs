@@ -4,7 +4,7 @@ using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities.RowReading
 {
-    public sealed class TrainingRowReader : ITrainingRowReader
+    public sealed class TrainingRowReader : IEntityRowReader<Training>
     {
         public Training Read(SqlDataReader reader)
         {

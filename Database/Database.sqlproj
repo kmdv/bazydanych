@@ -168,6 +168,7 @@
     <Build Include="Tables\Trainings.sql" />
     <Build Include="Tables\Trainees.sql" />
     <Build Include="Tables\Certificates.sql" />
+    <Build Include="Tables\UserCertificates.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EnterpriseTraining.ItemManagement
@@ -45,15 +40,17 @@ namespace EnterpriseTraining.ItemManagement
 
             set
             {
+                var newItems = value != null ? value : new List<IItem>();
+
                 var newBindingList = CreateEmptyBindingList();
-                foreach (var item in value)
+                foreach (var item in newItems)
                 {
                     newBindingList.Add(item);
                 }
 
                 comboBox.DataSource = newBindingList;
                 _bindingList = newBindingList;
-                _items = value;
+                _items = newItems;
             }
         }
 

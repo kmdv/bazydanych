@@ -24,7 +24,6 @@ namespace EnterpriseTraining.EntityManagement
             var entityItem = (EntityItem<T>)item;
 
             _editForm.Entity = entityItem.Entity;
-            _editForm.StartPosition = FormStartPosition.CenterParent;
 
             if (_editForm.ShowDialog(_owner) == DialogResult.OK)
             {

@@ -4,7 +4,7 @@ using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities.RowReading
 {
-    public sealed class CertificateRowReader : ICertificateRowReader
+    public sealed class CertificateRowReader : IEntityRowReader<Certificate>
     {
         public Certificate Read(SqlDataReader reader)
         {

@@ -4,7 +4,7 @@ using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.Entities.RowReading
 {
-    public sealed class UserRowReader : IUserRowReader
+    public sealed class UserRowReader : IEntityRowReader<User>
     {
         private readonly IOptionalCellReader _optionalCellReader;
 
@@ -26,7 +26,8 @@ namespace EnterpriseTraining.Entities.RowReading
                 City = _optionalCellReader.ReadString(reader, 6),
                 Street = _optionalCellReader.ReadString(reader, 7),
                 HouseNumber = _optionalCellReader.ReadInt(reader, 8),
-                FlatNumber = _optionalCellReader.ReadInt(reader, 9)
+                FlatNumber = _optionalCellReader.ReadInt(reader, 9),
+                PostCode = reader.GetString(10)
             };
         }
     }

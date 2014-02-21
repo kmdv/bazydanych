@@ -133,4 +133,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ScoredPoints" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f5086238-d47c-4826-8e27-c2ef9f32c047" ChangeDateTime="02/21/2014 12:58:29">
+    <Property Name="ElementName" Value="[dbo].[UserCertificates].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserCertificates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="59945477-f043-4273-b2ef-20a38bbfbabb" ChangeDateTime="02/21/2014 12:59:57">
+    <Property Name="ElementName" Value="[dbo].[UserCertificates].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserCertificates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TrainingId" />
+  </Operation>
 </Operations>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
+using EnterpriseTraining.ErrorHandling;
+
 namespace EnterpriseTraining.ItemManagement
 {
     public partial class ItemListManager : UserControl
@@ -28,53 +30,65 @@ namespace EnterpriseTraining.ItemManagement
 
         private void ListManager_Load(object sender, EventArgs e)
         {
-            foreach (var item in ItemFactory.CreateFullList())
+            ExceptionHandler.Invoke(this, delegate()
             {
-                _bindingList.Add(item);
-            }
+                foreach (var item in ItemFactory.CreateFullList())
+                {
+                    _bindingList.Add(item);
+                }
+            });
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            var newItem = ItemFactory.CreateNew();
-
-            if (ItemEditor.Edit(newItem) == ItemEditResult.Success)
+            ExceptionHandler.Invoke(this, delegate()
             {
-                ItemSaver.SaveNew(newItem);
-                _bindingList.Add(newItem);
-            }
+                var newItem = ItemFactory.CreateNew();
+
+                if (ItemEditor.Edit(newItem) == ItemEditResult.Success)
+                {
+                    ItemSaver.SaveNew(newItem);
+                    _bindingList.Add(newItem);
+                }
+            });
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            if (listBox.SelectedItems.Count > 0)
+            ExceptionHandler.Invoke(this, delegate()
             {
-                if (MessageBox.Show(
-                    "Are you sure you want to remove the selected items?",
-                    "Confirmation",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.Yes)
+                if (listBox.SelectedItems.Count > 0)
                 {
-                    var selectedItems = GetSelectedItems();
+                    if (MessageBox.Show(
+                        "Are you sure you want to remove the selected items?",
+                        "Confirmation",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        var selectedItems = GetSelectedItems();
 
-                    ItemRemover.Remove(selectedItems);
+                        ItemRemover.Remove(selectedItems);
 
-                    RemoveItems(selectedItems);
+                        RemoveItems(selectedItems);
+                    }
                 }
-            }
+            });
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            if (listBox.SelectedIndex >= 0)
+            ExceptionHandler.Invoke(this, delegate()
             {
-                var item = _bindingList[listBox.SelectedIndex];
-                
-                if (ItemEditor.Edit(item) == ItemEditResult.Success)
+                if (listBox.SelectedIndex >= 0)
                 {
-                    ItemSaver.SaveExisting(item);
+                    var item = _bindingList[listBox.SelectedIndex];
+
+                    if (ItemEditor.Edit(item) == ItemEditResult.Success)
+                    {
+                        ItemSaver.SaveExisting(item);
+                    }
                 }
-            }
+            });
         }
 
         private IList<IItem> GetSelectedItems()

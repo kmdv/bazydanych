@@ -1,19 +1,15 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-using EnterpriseTraining.Sql;
-
-namespace EnterpriseTraining.Entities
+namespace EnterpriseTraining.Entities.Sql
 {
-    public sealed class SqlUserSaver : IEntitySaver<User>
+    public sealed class UserSaver : AbstractEntitySaver<User>
     {
-        private const string InsertStatement =
+        private const string CustomInsertStatement =
             "INSERT INTO Users (FirstName, LastName, BirthDate, EmailAddress, Country, City, Street, HouseNumber, FlatNumber, PostCode) " +
             "VALUES (@FirstName, @LastName, @BirthDate, @EmailAddress, @Country, @City, @Street, @HouseNumber, @FlatNumber, @PostCode)" +
             "SET @Id = SCOPE_IDENTITY()";
 
-        private const string UpdateStatement =
+        private const string CustomUpdateStatement =
             "UPDATE Users SET " +
             "FirstName=@FirstName, " +
             "LastName=@LastName, " +
@@ -27,37 +23,11 @@ namespace EnterpriseTraining.Entities
             "PostCode=@PostCode " +
             "WHERE UserId=@Id";
 
-        public void SaveNew(ISession session, User user)
-        {
-            using (var command = session.CreateCommand(InsertStatement))
-            {
-                AddCommonFields(command, user);
+        private const string CustomIdColumnName = "UserId";
 
-                command.Parameters.Add("@Id", SqlDbType.Int, 0, "UserId").Direction = ParameterDirection.Output;
+        private const string CustomIdParameterName = "@Id";
 
-                EnableNullValues(command);
-
-                command.ExecuteNonQuery();
-
-                SetNewId(command, user);
-            }
-        }
-
-        public void SaveExisting(ISession session, User user)
-        {
-            using (var command = session.CreateCommand(UpdateStatement))
-            {
-                AddCommonFields(command, user);
-                
-                command.Parameters.Add(new SqlParameter("@Id", user.Id));
-
-                EnableNullValues(command);
-
-                command.ExecuteNonQuery();
-            }
-        }
-
-        private void AddCommonFields(SqlCommand command, User user)
+        protected override void AddCommonFields(SqlCommand command, User user)
         {
             command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
             command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
@@ -71,20 +41,24 @@ namespace EnterpriseTraining.Entities
             command.Parameters.Add(new SqlParameter("@PostCode", user.PostCode));
         }
 
-        private void EnableNullValues(SqlCommand command)
+        protected override string InsertStatement
         {
-            foreach (SqlParameter parameter in command.Parameters)
-            {
-                if (parameter.Value == null)
-                {
-                    parameter.Value = DBNull.Value;
-                }
-            }
+            get { return CustomInsertStatement; }
         }
 
-        private void SetNewId(SqlCommand command, User user)
+        protected override string UpdateStatement
         {
-            user.Id = (int)command.Parameters["@Id"].Value;
+            get { return CustomUpdateStatement; }
+        }
+
+        protected override string IdColumnName
+        {
+            get { return CustomIdColumnName; }
+        }
+
+        protected override string IdParameterName
+        {
+            get { return CustomIdParameterName; }
         }
     }
 }

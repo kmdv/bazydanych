@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using EnterpriseTraining.Entities;
 using EnterpriseTraining.EntityManagement;
 using EnterpriseTraining.FieldEditing;
+using EnterpriseTraining.ItemManagement;
 
 namespace EnterpriseTraining
 {
@@ -15,6 +16,8 @@ namespace EnterpriseTraining
 
         private readonly IFieldParser _fieldParser;
 
+        private readonly IItemFactory _certificateItemFactory;
+
         private User _user = new User();
 
         public User Entity
@@ -23,16 +26,22 @@ namespace EnterpriseTraining
             set { _user = value; }
         }
 
-        public EditUserForm(IFieldStringizer fieldStringizer, IFieldParser fieldParser)
+        public EditUserForm(
+            IFieldStringizer fieldStringizer,
+            IFieldParser fieldParser,
+            IItemFactory certificateItemFactory)
         {
             _fieldStringizer = fieldStringizer;
             _fieldParser = fieldParser;
+            _certificateItemFactory = certificateItemFactory;
 
             InitializeComponent();
         }
 
         private void EditUser_Shown(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = 0;
+
             firstNameTextBox.Text = _fieldStringizer.GetOptionalString(_user.FirstName);
             lastNameTextBox.Text = _fieldStringizer.GetOptionalString(_user.LastName);
             birthDatePicker.Value = GetConstrained(_user.BirthDate);
@@ -43,6 +52,9 @@ namespace EnterpriseTraining
             houseNumberTextBox.Text = _fieldStringizer.GetOptionalInt(_user.HouseNumber);
             flatNumberTextBox.Text = _fieldStringizer.GetOptionalInt(_user.FlatNumber);
             postCodeTextBox.Text = _fieldStringizer.GetOptionalString(_user.PostCode);
+
+            var certificateItems = _certificateItemFactory.CreateFullList();
+            certificatesMultipleChoice.SetCheckedEntities(certificateItems, _user.Certificates);
         }
 
         private DateTime GetConstrained(DateTime dateTime)
@@ -77,6 +89,7 @@ namespace EnterpriseTraining
             _user.HouseNumber = _fieldParser.ParseOptionalInt(houseNumberTextBox.Text);
             _user.FlatNumber = _fieldParser.ParseOptionalInt(flatNumberTextBox.Text);
             _user.PostCode = _fieldParser.ParseOptionalString(postCodeTextBox.Text);
+            _user.Certificates = certificatesMultipleChoice.GetCheckedEntities<Certificate>();
         }
     }
 }

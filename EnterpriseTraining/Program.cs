@@ -9,6 +9,7 @@ namespace EnterpriseTraining
     static class Program
     {
         private const string ConnectionString =
+            "MultipleActiveResultSets=True;" +
             "Data Source=(local);" +
             "Initial Catalog=EnterpriseTraining;" +
             "Integrated Security=SSPI;";
@@ -16,12 +17,12 @@ namespace EnterpriseTraining
         [STAThread]
         static void Main()
         {
-            var sqlConnectionFactory = new SessionFactory(ConnectionString);
+            var sessionFactory = new SessionFactory(ConnectionString);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var mainForm = new MainForm(sqlConnectionFactory);
+            var mainForm = new MainForm(sessionFactory);
 
             Application.Run(mainForm);
         }

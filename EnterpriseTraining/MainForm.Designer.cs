@@ -141,6 +141,7 @@
             this.ClientSize = new System.Drawing.Size(528, 392);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enterprise Training";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
