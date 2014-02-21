@@ -9,25 +9,14 @@ namespace EnterpriseTraining.Sql
         private const string IdFormat = "{0:d}";
         private const string IdSeparator = ", ";
 
-        public string Stringize(IEnumerable<IEntity> entities)
-        {
-            return GetIdsAsString(GetIds(entities));
-        }
-
-        private IList<int> GetIds(IEnumerable<IEntity> entities)
-        {
-            var ids = new List<int>();
-            foreach (var entity in entities)
-            {
-                ids.Add(entity.Id);
-            }
-
-            return ids;
-        }
-
-        private string GetIdsAsString(IEnumerable<int> ids)
+        public string Stringize(IEnumerable<int> ids)
         {
             return string.Join(IdSeparator, GetIdsAsStringList(ids));
+        }
+
+        public string Stringize(IEnumerable<IEntity> entities)
+        {
+            return Stringize(GetIds(entities));
         }
 
         private IList<string> GetIdsAsStringList(IEnumerable<int> ids)
@@ -39,6 +28,17 @@ namespace EnterpriseTraining.Sql
             }
 
             return idsAsStringList;
+        }
+
+        private IList<int> GetIds(IEnumerable<IEntity> entities)
+        {
+            var ids = new List<int>();
+            foreach (var entity in entities)
+            {
+                ids.Add(entity.Id);
+            }
+
+            return ids;
         }
     }
 }

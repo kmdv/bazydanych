@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EnterpriseTraining.ObjectManagement
+namespace EnterpriseTraining.ItemManagement
 {
     public class NullItemFactory : IItemFactory
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
-using EnterpriseTraining.ObjectManagement;
+using EnterpriseTraining.ItemManagement;
 using EnterpriseTraining.Sql;
 using EnterpriseTraining.Entities;
 

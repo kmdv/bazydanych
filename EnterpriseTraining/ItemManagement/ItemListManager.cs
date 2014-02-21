@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace EnterpriseTraining.ObjectManagement
+namespace EnterpriseTraining.ItemManagement
 {
     public partial class ItemListManager : UserControl
     {

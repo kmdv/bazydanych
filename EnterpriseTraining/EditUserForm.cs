@@ -3,12 +3,17 @@ using System.Windows.Forms;
 
 using EnterpriseTraining.Entities;
 using EnterpriseTraining.EntityManagement;
+using EnterpriseTraining.FieldEditing;
 
 namespace EnterpriseTraining
 {
     public partial class EditUserForm : Form, IEntityEditForm<User>
     {
         private const string IntFormat = "{0:d}";
+
+        private readonly IFieldStringizer _fieldStringizer;
+
+        private readonly IFieldParser _fieldParser;
 
         private User _user = new User();
 
@@ -18,23 +23,26 @@ namespace EnterpriseTraining
             set { _user = value; }
         }
 
-        public EditUserForm()
+        public EditUserForm(IFieldStringizer fieldStringizer, IFieldParser fieldParser)
         {
+            _fieldStringizer = fieldStringizer;
+            _fieldParser = fieldParser;
+
             InitializeComponent();
         }
 
         private void EditUser_Shown(object sender, EventArgs e)
         {
-            firstNameTextBox.Text = GetOptional(_user.FirstName);
-            lastNameTextBox.Text = GetOptional(_user.LastName);
+            firstNameTextBox.Text = _fieldStringizer.GetOptionalString(_user.FirstName);
+            lastNameTextBox.Text = _fieldStringizer.GetOptionalString(_user.LastName);
             birthDatePicker.Value = GetConstrained(_user.BirthDate);
-            emailAddressTextBox.Text = GetOptional(_user.EmailAddress);
-            countryTextBox.Text = GetOptional(_user.Country);
-            cityTextBox.Text = GetOptional(_user.City);
-            streetTextBox.Text = GetOptional(_user.Street);
-            houseNumberTextBox.Text = GetOptional(_user.HouseNumber);
-            flatNumberTextBox.Text = GetOptional(_user.FlatNumber);
-            postCodeTextBox.Text = GetOptional(_user.PostCode);
+            emailAddressTextBox.Text = _fieldStringizer.GetOptionalString(_user.EmailAddress);
+            countryTextBox.Text = _fieldStringizer.GetOptionalString(_user.Country);
+            cityTextBox.Text = _fieldStringizer.GetOptionalString(_user.City);
+            streetTextBox.Text = _fieldStringizer.GetOptionalString(_user.Street);
+            houseNumberTextBox.Text = _fieldStringizer.GetOptionalInt(_user.HouseNumber);
+            flatNumberTextBox.Text = _fieldStringizer.GetOptionalInt(_user.FlatNumber);
+            postCodeTextBox.Text = _fieldStringizer.GetOptionalString(_user.PostCode);
         }
 
         private DateTime GetConstrained(DateTime dateTime)
@@ -57,40 +65,18 @@ namespace EnterpriseTraining
             return dateTime;
         }
 
-        private string GetOptional(string value)
-        {
-            return value == null ? string.Empty : value;
-        }
-
-        private string GetOptional(int? value)
-        {
-            return value == null ? string.Empty : string.Format(IntFormat, value);
-        }
-
-        private string ToOptionalString(string value)
-        {
-            return string.IsNullOrEmpty(value) ? null : value;
-        }
-
-        private int? ToOptionalInt(string value)
-        {
-            return string.IsNullOrEmpty(value)
-                ? null as int?
-                : int.Parse(value);
-        }
-
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            _user.FirstName = ToOptionalString(firstNameTextBox.Text);
-            _user.LastName = ToOptionalString(lastNameTextBox.Text);
+            _user.FirstName = _fieldParser.ParseOptionalString(firstNameTextBox.Text);
+            _user.LastName = _fieldParser.ParseOptionalString(lastNameTextBox.Text);
             _user.BirthDate = birthDatePicker.Value;
-            _user.EmailAddress = ToOptionalString(emailAddressTextBox.Text);
-            _user.Country = ToOptionalString(countryTextBox.Text);
-            _user.City = ToOptionalString(cityTextBox.Text);
-            _user.Street = ToOptionalString(streetTextBox.Text);
-            _user.HouseNumber = ToOptionalInt(houseNumberTextBox.Text);
-            _user.FlatNumber = ToOptionalInt(flatNumberTextBox.Text);
-            _user.PostCode = ToOptionalString(postCodeTextBox.Text);
+            _user.EmailAddress = _fieldParser.ParseOptionalString(emailAddressTextBox.Text);
+            _user.Country = _fieldParser.ParseOptionalString(countryTextBox.Text);
+            _user.City = _fieldParser.ParseOptionalString(cityTextBox.Text);
+            _user.Street = _fieldParser.ParseOptionalString(streetTextBox.Text);
+            _user.HouseNumber = _fieldParser.ParseOptionalInt(houseNumberTextBox.Text);
+            _user.FlatNumber = _fieldParser.ParseOptionalInt(flatNumberTextBox.Text);
+            _user.PostCode = _fieldParser.ParseOptionalString(postCodeTextBox.Text);
         }
     }
 }

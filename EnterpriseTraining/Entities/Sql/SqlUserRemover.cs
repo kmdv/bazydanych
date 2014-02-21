@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlClient;
 
 using EnterpriseTraining.Sql;
 
@@ -7,7 +6,7 @@ namespace EnterpriseTraining.Entities
 {
     public class SqlUserRemover : IEntityRemover<User>
     {
-        private const string DeleteStatementFormat = "DELETE FROM Users WHERE UserId IN ({0})";
+        private const string DeleteFormat = "DELETE FROM Users WHERE UserId IN ({0})";
 
         private readonly IIdListStringizer _idListStringizer;
 
@@ -26,7 +25,7 @@ namespace EnterpriseTraining.Entities
 
         private string GetDeleteStatement(IEnumerable<User> users)
         {
-            return string.Format(DeleteStatementFormat, _idListStringizer.Stringize(users));
+            return string.Format(DeleteFormat, _idListStringizer.Stringize(users));
         }
     }
 }

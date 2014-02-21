@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace EnterpriseTraining.ObjectManagement
+namespace EnterpriseTraining.ItemManagement
 {
     public partial class ItemDropDownList : UserControl
     {
         private BindingList<IItem> _bindingList = CreateEmptyBindingList();
+
+        private IList<IItem> _items = new List<IItem>();
 
         public ItemDropDownList()
         {
@@ -21,26 +23,38 @@ namespace EnterpriseTraining.ObjectManagement
             comboBox.SelectedIndex = 0;
         }
 
-        public IItem TryToGetSelectedItem()
+        public IItem SelectedItem
         {
-            if (comboBox.SelectedIndex > 0)
+            get
             {
-                return _bindingList[comboBox.SelectedIndex];
+                return comboBox.SelectedIndex > 0 ? _bindingList[comboBox.SelectedIndex] : null;
             }
 
-            return null;
+            set
+            {
+                comboBox.SelectedIndex = _bindingList.Contains(value) ? _bindingList.IndexOf(value) : 0;
+            }
         }
 
-        public void SetItems(IList<IItem> items)
+        public IList<IItem> Items
         {
-            var newBindingList = CreateEmptyBindingList();
-            foreach (var item in items)
+            get
             {
-                newBindingList.Add(item);
+                return _items;
             }
 
-            comboBox.DataSource = newBindingList;
-            _bindingList = newBindingList;
+            set
+            {
+                var newBindingList = CreateEmptyBindingList();
+                foreach (var item in value)
+                {
+                    newBindingList.Add(item);
+                }
+
+                comboBox.DataSource = newBindingList;
+                _bindingList = newBindingList;
+                _items = value;
+            }
         }
 
         private static BindingList<IItem> CreateEmptyBindingList()

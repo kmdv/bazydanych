@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EnterpriseTraining.ObjectManagement
+namespace EnterpriseTraining.ItemManagement
 {
     public interface IItem : INotifyPropertyChanged
     {

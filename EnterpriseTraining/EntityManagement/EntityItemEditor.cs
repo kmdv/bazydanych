@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 
 using EnterpriseTraining.Entities;
-using EnterpriseTraining.ObjectManagement;
+using EnterpriseTraining.ItemManagement;
 
 namespace EnterpriseTraining.EntityManagement
 {
@@ -21,14 +21,14 @@ namespace EnterpriseTraining.EntityManagement
 
         public ItemEditResult Edit(IItem item)
         {
-            var userItem = (EntityItem<T>)item;
+            var entityItem = (EntityItem<T>)item;
 
-            _editForm.Entity = userItem.Entity;
+            _editForm.Entity = entityItem.Entity;
             _editForm.StartPosition = FormStartPosition.CenterParent;
 
             if (_editForm.ShowDialog(_owner) == DialogResult.OK)
             {
-                userItem.Entity = _editForm.Entity;
+                entityItem.Entity = _editForm.Entity;
                 return ItemEditResult.Success;
             }
 

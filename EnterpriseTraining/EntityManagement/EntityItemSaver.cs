@@ -1,5 +1,5 @@
 ﻿using EnterpriseTraining.Entities;
-using EnterpriseTraining.ObjectManagement;
+using EnterpriseTraining.ItemManagement;
 using EnterpriseTraining.Sql;
 
 namespace EnterpriseTraining.EntityManagement

@@ -1,4 +1,4 @@
-﻿namespace EnterpriseTraining.ObjectManagement
+﻿namespace EnterpriseTraining.ItemManagement
 {
     public enum ItemEditResult
     {

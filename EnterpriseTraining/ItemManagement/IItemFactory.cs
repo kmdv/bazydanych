@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EnterpriseTraining.ObjectManagement
+namespace EnterpriseTraining.ItemManagement
 {
     public interface IItemFactory
     {

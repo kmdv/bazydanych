@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            EnterpriseTraining.ObjectManagement.NullItemEditor nullItemEditor1 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
-            EnterpriseTraining.ObjectManagement.NullItemFactory nullItemFactory1 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
-            EnterpriseTraining.ObjectManagement.NullItemRemover nullItemRemover1 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
-            EnterpriseTraining.ObjectManagement.NullItemSaver nullItemSaver1 = new EnterpriseTraining.ObjectManagement.NullItemSaver();
-            EnterpriseTraining.ObjectManagement.NullItemEditor nullItemEditor2 = new EnterpriseTraining.ObjectManagement.NullItemEditor();
-            EnterpriseTraining.ObjectManagement.NullItemFactory nullItemFactory2 = new EnterpriseTraining.ObjectManagement.NullItemFactory();
-            EnterpriseTraining.ObjectManagement.NullItemRemover nullItemRemover2 = new EnterpriseTraining.ObjectManagement.NullItemRemover();
-            EnterpriseTraining.ObjectManagement.NullItemSaver nullItemSaver2 = new EnterpriseTraining.ObjectManagement.NullItemSaver();
-            this.certificateDropDownList = new EnterpriseTraining.ObjectManagement.ItemDropDownList();
+            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor1 = new EnterpriseTraining.ItemManagement.NullItemEditor();
+            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory1 = new EnterpriseTraining.ItemManagement.NullItemFactory();
+            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover1 = new EnterpriseTraining.ItemManagement.NullItemRemover();
+            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver1 = new EnterpriseTraining.ItemManagement.NullItemSaver();
+            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor2 = new EnterpriseTraining.ItemManagement.NullItemEditor();
+            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory2 = new EnterpriseTraining.ItemManagement.NullItemFactory();
+            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover2 = new EnterpriseTraining.ItemManagement.NullItemRemover();
+            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver2 = new EnterpriseTraining.ItemManagement.NullItemSaver();
+            this.certificateDropDownList = new EnterpriseTraining.ItemManagement.ItemDropDownList();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.maxPointsTextBox = new System.Windows.Forms.TextBox();
@@ -57,9 +57,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.trainersManager = new EnterpriseTraining.ObjectManagement.ItemListManager();
+            this.trainersManager = new EnterpriseTraining.ItemManagement.ItemListManager();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.itemListManager1 = new EnterpriseTraining.ObjectManagement.ItemListManager();
+            this.itemListManager1 = new EnterpriseTraining.ItemManagement.ItemListManager();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -332,7 +332,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EditTrainingForm";
             this.Text = "Edit Training";
-            this.Shown += new System.EventHandler(this.EditUser_Shown);
+            this.Shown += new System.EventHandler(this.EditTrainingForm_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -361,12 +361,12 @@
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.DateTimePicker startDatePicker;
         private System.Windows.Forms.DateTimePicker endDatePicker;
-        private ObjectManagement.ItemDropDownList certificateDropDownList;
+        private ItemManagement.ItemDropDownList certificateDropDownList;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private ObjectManagement.ItemListManager trainersManager;
+        private ItemManagement.ItemListManager trainersManager;
         private System.Windows.Forms.TabPage tabPage3;
-        private ObjectManagement.ItemListManager itemListManager1;
+        private ItemManagement.ItemListManager itemListManager1;
     }
 }

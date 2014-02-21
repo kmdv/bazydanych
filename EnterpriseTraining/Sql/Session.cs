@@ -13,14 +13,27 @@ namespace EnterpriseTraining.Sql
             _connection = connection;
         }
 
+        public SqlCommand CreateQuery()
+        {
+            return CreateQuery(string.Empty);
+        }
+
         public SqlCommand CreateQuery(string queryText)
         {
             return new SqlCommand(queryText, _connection);
         }
 
+        public SqlCommand CreateCommand()
+        {
+            return CreateCommand(string.Empty);
+        }
+
         public SqlCommand CreateCommand(string commandText)
         {
-            CreateTransactionIfNotCreatedYet();
+            if (_transaction == null)
+            {
+                _transaction = _connection.BeginTransaction();
+            }
 
             return new SqlCommand(commandText, _connection, _transaction);
         }
@@ -61,14 +74,6 @@ namespace EnterpriseTraining.Sql
             {
                 _transaction.Dispose();
                 _transaction = null;
-            }
-        }
-
-        private void CreateTransactionIfNotCreatedYet()
-        {
-            if (_transaction == null)
-            {
-                _transaction = _connection.BeginTransaction();
             }
         }
     }

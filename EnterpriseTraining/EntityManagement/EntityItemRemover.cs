@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using EnterpriseTraining.ObjectManagement;
+using EnterpriseTraining.ItemManagement;
 using EnterpriseTraining.Sql;
 using EnterpriseTraining.Entities;
 

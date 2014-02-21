@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditCertificateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCertificateForm.Designer.cs">
+      <DependentUpon>EditCertificateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditTrainingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,52 +65,74 @@
       <DependentUpon>EditUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Certificate.cs" />
-    <Compile Include="Entities\Trainer.cs" />
+    <Compile Include="Entities\RowReading\CertificateListQueryReader.cs" />
+    <Compile Include="Entities\RowReading\CertificateRowReader.cs" />
+    <Compile Include="Entities\RowReading\ICertificateListQueryReader.cs" />
+    <Compile Include="Entities\RowReading\ICertificateReader.cs" />
+    <Compile Include="Entities\RowReading\TrainingListQueryReader.cs" />
+    <Compile Include="Entities\RowReading\ITrainingListQueryReader.cs" />
+    <Compile Include="Entities\RowReading\IUserListQueryReader.cs" />
+    <Compile Include="Entities\RowReading\TrainingRowReader.cs" />
+    <Compile Include="Entities\RowReading\ITrainingRowReader.cs" />
+    <Compile Include="Entities\RowReading\IUserRowReader.cs" />
+    <Compile Include="Entities\RowReading\UserListQueryReader.cs" />
+    <Compile Include="Entities\RowReading\UserRowReader.cs" />
+    <Compile Include="Entities\Sql\SqlCertificateSaver.cs" />
+    <Compile Include="Entities\Sql\SqlCertificateRemover.cs" />
+    <Compile Include="Entities\Sql\SqlCertificateLoader.cs" />
+    <Compile Include="Entities\Sql\SqlTrainingSaver.cs" />
+    <Compile Include="Entities\Sql\SqlTrainingRemover.cs" />
+    <Compile Include="Entities\Sql\SqlTrainingLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="FieldEditing\FieldParser.cs" />
+    <Compile Include="FieldEditing\IFieldParser.cs" />
+    <Compile Include="FieldEditing\FieldStringizer.cs" />
+    <Compile Include="FieldEditing\IFieldStringizer.cs" />
     <Compile Include="Sql\IIdListStringizer.cs" />
     <Compile Include="Sql\IdListStringizer.cs" />
     <Compile Include="Sql\IOptionalCellReader.cs" />
     <Compile Include="Sql\OptionalCellReader.cs" />
-    <Compile Include="Entities\DefaultUserFactory.cs" />
+    <Compile Include="Entities\DefaultEntityFactory.cs" />
     <Compile Include="Entities\IEntityFactory.cs" />
-    <Compile Include="Entities\SqlUserLoader.cs" />
-    <Compile Include="Entities\SqlUserRemover.cs" />
-    <Compile Include="Entities\SqlUserSaver.cs" />
+    <Compile Include="Entities\Sql\SqlUserLoader.cs" />
+    <Compile Include="Entities\Sql\SqlUserRemover.cs" />
+    <Compile Include="Entities\Sql\SqlUserSaver.cs" />
     <Compile Include="Entities\IEntityLoader.cs" />
     <Compile Include="Entities\IEntityRemover.cs" />
     <Compile Include="Entities\IEntitySaver.cs" />
     <Compile Include="Entities\Training.cs" />
     <Compile Include="EntityManagement\CertificateStringizer.cs" />
-    <Compile Include="Entities\Trainee.cs" />
     <Compile Include="EntityManagement\TrainingStringizer.cs" />
     <Compile Include="EntityManagement\EntityItem.cs" />
     <Compile Include="EntityManagement\IEntityEditForm.cs" />
     <Compile Include="EntityManagement\IEntityStringizer.cs" />
     <Compile Include="EntityManagement\EntityItemFactory.cs" />
-    <Compile Include="ObjectManagement\IItemRemover.cs" />
-    <Compile Include="ObjectManagement\IItem.cs" />
-    <Compile Include="ObjectManagement\IItemFactory.cs" />
-    <Compile Include="ObjectManagement\IItemSaver.cs" />
-    <Compile Include="ObjectManagement\ItemDropDownList.cs">
+    <Compile Include="ItemManagement\IItemRemover.cs" />
+    <Compile Include="ItemManagement\IItem.cs" />
+    <Compile Include="ItemManagement\IItemFactory.cs" />
+    <Compile Include="ItemManagement\IItemSaver.cs" />
+    <Compile Include="ItemManagement\ItemDropDownList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ObjectManagement\ItemDropDownList.Designer.cs">
+    <Compile Include="ItemManagement\ItemDropDownList.Designer.cs">
       <DependentUpon>ItemDropDownList.cs</DependentUpon>
     </Compile>
-    <Compile Include="ObjectManagement\ItemEditResult.cs" />
-    <Compile Include="ObjectManagement\ItemListManager.cs">
+    <Compile Include="ItemManagement\ItemEditResult.cs" />
+    <Compile Include="ItemManagement\ItemListManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ObjectManagement\ItemListManager.Designer.cs">
+    <Compile Include="ItemManagement\ItemListManager.Designer.cs">
       <DependentUpon>ItemListManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ObjectManagement\NoneItem.cs" />
-    <Compile Include="ObjectManagement\NullItemEditor.cs" />
-    <Compile Include="ObjectManagement\NullItemFactory.cs" />
-    <Compile Include="ObjectManagement\NullItemRemover.cs" />
-    <Compile Include="ObjectManagement\NullListItemSaver.cs" />
+    <Compile Include="ItemManagement\NoneItem.cs" />
+    <Compile Include="ItemManagement\NullItemEditor.cs" />
+    <Compile Include="ItemManagement\NullItemFactory.cs" />
+    <Compile Include="ItemManagement\NullItemRemover.cs" />
+    <Compile Include="ItemManagement\NullListItemSaver.cs" />
     <Compile Include="Sql\SessionFactory.cs" />
-    <Compile Include="ObjectManagement\IItemEditor.cs" />
+    <Compile Include="ItemManagement\IItemEditor.cs" />
     <Compile Include="Sql\ISessionFactory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -121,16 +149,19 @@
     <Compile Include="EntityManagement\EntityItemSaver.cs" />
     <Compile Include="Sql\ISession.cs" />
     <Compile Include="Sql\Session.cs" />
+    <EmbeddedResource Include="EditCertificateForm.resx">
+      <DependentUpon>EditCertificateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditTrainingForm.resx">
       <DependentUpon>EditTrainingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditUserForm.resx">
       <DependentUpon>EditUserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ObjectManagement\ItemDropDownList.resx">
+    <EmbeddedResource Include="ItemManagement\ItemDropDownList.resx">
       <DependentUpon>ItemDropDownList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ObjectManagement\ItemListManager.resx">
+    <EmbeddedResource Include="ItemManagement\ItemListManager.resx">
       <DependentUpon>ItemListManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

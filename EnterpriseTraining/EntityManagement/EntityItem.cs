@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-using EnterpriseTraining.ObjectManagement;
+using EnterpriseTraining.ItemManagement;
 using EnterpriseTraining.Entities;
 
 namespace EnterpriseTraining.EntityManagement

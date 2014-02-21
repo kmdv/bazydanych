@@ -41,7 +41,7 @@
     <OutputPath>.\sql\debug\</OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
     <TargetConnectionString>Data Source=KMLAPTOP;Integrated Security=True;Pooling=False</TargetConnectionString>
-    <TargetDatabase>enterprisetraining</TargetDatabase>
+    <TargetDatabase>EnterpriseTraining</TargetDatabase>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <SuppressWarnings>
     </SuppressWarnings>
