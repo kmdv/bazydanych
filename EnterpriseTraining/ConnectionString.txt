@@ -1,0 +1,1 @@
+﻿MultipleActiveResultSets=True;Data Source=(local);Initial Catalog=EnterpriseTraining;Integrated Security=SSPI;
