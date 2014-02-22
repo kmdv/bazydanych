@@ -116,6 +116,10 @@
     <Compile Include="ItemManagement\ItemSelectForm.Designer.cs">
       <DependentUpon>ItemSelectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\IReportGenerator.cs" />
+    <Compile Include="Reports\ReportGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Sql\IIdListStringizer.cs" />
     <Compile Include="Sql\IdListStringizer.cs" />
     <Compile Include="Sql\IOptionalCellReader.cs" />

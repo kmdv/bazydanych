@@ -1,19 +1,32 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 using EnterpriseTraining.Sql;
+using EnterpriseTraining.ErrorHandling;
 using EnterpriseTraining.Entities;
 using EnterpriseTraining.Entities.RowReading;
 using EnterpriseTraining.EntityManagement;
 using EnterpriseTraining.FieldEditing;
 using EnterpriseTraining.ItemManagement;
 using EnterpriseTraining.Entities.Sql;
+using EnterpriseTraining.Reports;
 
 namespace EnterpriseTraining
 {
     public partial class MainForm : Form
     {
+        private readonly ISessionFactory _sessionFactory;
+
+        private readonly IReportGenerator _reportGenerator;
+
+        private TextReader _printedFile;
+
         public MainForm(ISessionFactory sessionFactory)
         {
+            _sessionFactory = sessionFactory;
+
             InitializeComponent();
 
             var fieldStringizer = new FieldStringizer();
@@ -22,7 +35,7 @@ namespace EnterpriseTraining
             var optionalCellReader = new OptionalCellReader();
             var idListStringizer = new IdListStringizer();
 
-            var editCertificateForm = new EditCertificateForm();
+            var editCertificateForm = new EditCertificateForm(fieldStringizer, fieldParser);
 
             var certificateRowReader = new CertificateRowReader();
             var certificateListReader = new CertificateListReader(certificateRowReader);
@@ -32,7 +45,7 @@ namespace EnterpriseTraining
                 certificateListReader,
                 "Certificates",
                 "CertificateId",
-                "Name");
+                "Name, ValidityYears");
 
             var certificateSaver = new CertificateSaver();
 
@@ -128,6 +141,119 @@ namespace EnterpriseTraining
             certificateManager.ItemFactory = certificateItemFactory;
             certificateManager.ItemSaver = certificateItemSaver;
             certificateManager.ItemRemover = certificateItemRemover;
+
+            _reportGenerator = new ReportGenerator();
+        }
+
+        private void printButton_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    var reportStream = new MemoryStream();
+
+                    PrintReport(new StreamWriter(reportStream));
+                    reportStream.Seek(0, SeekOrigin.Begin);
+
+                    _printedFile = new StreamReader(reportStream);
+
+                    printDocument.Print();
+                }
+            });
+        }
+
+        private void printToFileButton_Click(object sender, System.EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    PrintReportToFile(saveFileDialog.FileName);
+                }
+            });
+        }
+
+        private void PrintReportToFile(string fileName)
+        {
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                using (var writer = new StreamWriter(fs))
+                {
+                    PrintReport(writer);
+                }
+            }
+        }
+
+        private void PrintReport(TextWriter writer)
+        {
+            using (var session = _sessionFactory.Create())
+            {
+                writer.WriteLine("--------------------------------------------------------------------------------");
+                writer.WriteLine("Enterprise Training Report");
+                writer.WriteLine("Date: {0}", DateTime.UtcNow.ToShortDateString());
+                writer.WriteLine("--------------------------------------------------------------------------------");
+                writer.WriteLine();
+                writer.WriteLine("Top 5 users with highest number of certifices:");
+
+                foreach (var result in _reportGenerator.GetUsersWithMostCertificates(session, 5))
+                {
+                    writer.WriteLine("{0} certificate(s) - {1}", result.Item2, result.Item1);
+                }
+
+                writer.WriteLine();
+                writer.WriteLine("Top 5 most active trainees (with at least 3 trainings):");
+
+                foreach (var result in _reportGenerator.GetMostActiveTrainees(session, 3))
+                {
+                    writer.WriteLine("{0} training(s) - {1}", result.Item2, result.Item1);
+                }
+
+                writer.WriteLine();
+                writer.WriteLine("Trainings by cost:");
+
+                foreach (var result in _reportGenerator.GetTrainingsByCost(session))
+                {
+                    writer.WriteLine("{0:c} - {1}", result.Item2, result.Item1);
+                }
+
+                writer.WriteLine();
+                writer.WriteLine("Available certificates:");
+
+                foreach (var result in _reportGenerator.GetAvailableCertificates(session))
+                {
+                    writer.WriteLine("{0} - {1} year(s)", result.Item1, result.Item2);
+                }
+            }
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var printFont = new Font("Arial", 10);
+
+            float yPos = 0f;
+            int count = 0;
+            float leftMargin = e.MarginBounds.Left;
+            float topMargin = e.MarginBounds.Top;
+            string line = null;
+            float linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
+            while (count < linesPerPage)
+            {
+                line = _printedFile.ReadLine();
+                if (line == null)
+                {
+                    break;
+                }
+
+                yPos = topMargin + count * printFont.GetHeight(e.Graphics);
+                e.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                count++;
+            }
+
+            if (line != null)
+            {
+                e.HasMorePages = true;
+            }
         }
     }
 }

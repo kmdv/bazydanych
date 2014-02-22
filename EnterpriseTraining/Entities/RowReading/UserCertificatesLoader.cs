@@ -11,7 +11,7 @@ namespace EnterpriseTraining.Entities.RowReading
     public class UserCertificatesLoader : EnterpriseTraining.Entities.RowReading.IUserCertificatesLoader
     {
         private const string SelectStatement =
-            "SELECT C.CertificateId, Name FROM Certificates C " +
+            "SELECT C.CertificateId, Name, ValidityYears FROM Certificates C " +
             "INNER JOIN UserCertificates UC ON UC.CertificateId = C.CertificateId " +
             "WHERE UC.UserId = @UserId";
 

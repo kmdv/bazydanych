@@ -11,7 +11,8 @@ namespace EnterpriseTraining.Entities.RowReading
             return new Certificate
             {
                 Id = reader.GetInt32(0),
-                Name = reader.GetString(1)
+                Name = reader.GetString(1),
+                ValidityYears = reader.GetInt32(2)
             };
         }
     }
