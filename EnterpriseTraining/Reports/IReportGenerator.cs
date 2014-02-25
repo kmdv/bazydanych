@@ -15,5 +15,11 @@ namespace EnterpriseTraining.Reports
         IList<Tuple<string, decimal>> GetTrainingsByCost(ISession session);
 
         IList<Tuple<string, int>> GetAvailableCertificates(ISession session);
+
+        IList<Tuple<string, string>> GetAllTrainees(ISession session);
+
+        IList<Tuple<string, string>> GetAllTrainers(ISession session);
+
+        IList<string> GetUsersWhichAreTrainerAndTrainee(ISession session);
     }
 }

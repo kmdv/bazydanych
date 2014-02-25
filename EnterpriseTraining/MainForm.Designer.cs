@@ -28,23 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor1 = new EnterpriseTraining.ItemManagement.NullItemEditor();
-            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory1 = new EnterpriseTraining.ItemManagement.NullItemFactory();
-            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover1 = new EnterpriseTraining.ItemManagement.NullItemRemover();
-            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver1 = new EnterpriseTraining.ItemManagement.NullItemSaver();
-            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor2 = new EnterpriseTraining.ItemManagement.NullItemEditor();
-            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory2 = new EnterpriseTraining.ItemManagement.NullItemFactory();
-            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover2 = new EnterpriseTraining.ItemManagement.NullItemRemover();
-            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver2 = new EnterpriseTraining.ItemManagement.NullItemSaver();
-            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor3 = new EnterpriseTraining.ItemManagement.NullItemEditor();
-            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory3 = new EnterpriseTraining.ItemManagement.NullItemFactory();
-            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover3 = new EnterpriseTraining.ItemManagement.NullItemRemover();
-            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver3 = new EnterpriseTraining.ItemManagement.NullItemSaver();
+            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor19 = new EnterpriseTraining.ItemManagement.NullItemEditor();
+            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory19 = new EnterpriseTraining.ItemManagement.NullItemFactory();
+            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover19 = new EnterpriseTraining.ItemManagement.NullItemRemover();
+            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver19 = new EnterpriseTraining.ItemManagement.NullItemSaver();
+            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor20 = new EnterpriseTraining.ItemManagement.NullItemEditor();
+            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory20 = new EnterpriseTraining.ItemManagement.NullItemFactory();
+            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover20 = new EnterpriseTraining.ItemManagement.NullItemRemover();
+            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver20 = new EnterpriseTraining.ItemManagement.NullItemSaver();
+            EnterpriseTraining.ItemManagement.NullItemEditor nullItemEditor21 = new EnterpriseTraining.ItemManagement.NullItemEditor();
+            EnterpriseTraining.ItemManagement.NullItemFactory nullItemFactory21 = new EnterpriseTraining.ItemManagement.NullItemFactory();
+            EnterpriseTraining.ItemManagement.NullItemRemover nullItemRemover21 = new EnterpriseTraining.ItemManagement.NullItemRemover();
+            EnterpriseTraining.ItemManagement.NullItemSaver nullItemSaver21 = new EnterpriseTraining.ItemManagement.NullItemSaver();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.userManager = new EnterpriseTraining.ItemManagement.ItemListManager();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.trainingManager = new EnterpriseTraining.ItemManagement.ItemListManager();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.certificateManager = new EnterpriseTraining.ItemManagement.ItemListManager();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.queryButton7 = new System.Windows.Forms.Button();
+            this.queryButton6 = new System.Windows.Forms.Button();
+            this.queryButton5 = new System.Windows.Forms.Button();
+            this.queryButton4 = new System.Windows.Forms.Button();
+            this.queryButton3 = new System.Windows.Forms.Button();
+            this.queryButton2 = new System.Windows.Forms.Button();
+            this.queryButton1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.printButton = new System.Windows.Forms.Button();
@@ -57,14 +68,12 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.userManager = new EnterpriseTraining.ItemManagement.ItemListManager();
-            this.trainingManager = new EnterpriseTraining.ItemManagement.ItemListManager();
-            this.certificateManager = new EnterpriseTraining.ItemManagement.ItemListManager();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -81,7 +90,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(532, 405);
+            this.tabControl1.Size = new System.Drawing.Size(688, 606);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -90,10 +99,22 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(524, 376);
+            this.tabPage1.Size = new System.Drawing.Size(673, 626);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Users";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // userManager
+            // 
+            this.userManager.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userManager.ItemEditor = nullItemEditor19;
+            this.userManager.ItemFactory = nullItemFactory19;
+            this.userManager.ItemRemover = nullItemRemover19;
+            this.userManager.ItemSaver = nullItemSaver19;
+            this.userManager.Location = new System.Drawing.Point(3, 3);
+            this.userManager.Name = "userManager";
+            this.userManager.Size = new System.Drawing.Size(667, 620);
+            this.userManager.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -101,10 +122,22 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(524, 376);
+            this.tabPage2.Size = new System.Drawing.Size(673, 626);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Trainings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // trainingManager
+            // 
+            this.trainingManager.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trainingManager.ItemEditor = nullItemEditor20;
+            this.trainingManager.ItemFactory = nullItemFactory20;
+            this.trainingManager.ItemRemover = nullItemRemover20;
+            this.trainingManager.ItemSaver = nullItemSaver20;
+            this.trainingManager.Location = new System.Drawing.Point(3, 3);
+            this.trainingManager.Name = "trainingManager";
+            this.trainingManager.Size = new System.Drawing.Size(667, 620);
+            this.trainingManager.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -112,28 +145,127 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(524, 376);
+            this.tabPage3.Size = new System.Drawing.Size(673, 626);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Certificates";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // certificateManager
+            // 
+            this.certificateManager.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.certificateManager.ItemEditor = nullItemEditor21;
+            this.certificateManager.ItemFactory = nullItemFactory21;
+            this.certificateManager.ItemRemover = nullItemRemover21;
+            this.certificateManager.ItemSaver = nullItemSaver21;
+            this.certificateManager.Location = new System.Drawing.Point(3, 3);
+            this.certificateManager.Name = "certificateManager";
+            this.certificateManager.Size = new System.Drawing.Size(667, 620);
+            this.certificateManager.TabIndex = 0;
+            // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.groupBox3);
             this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.groupBox1);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(524, 376);
+            this.tabPage4.Size = new System.Drawing.Size(680, 577);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Report";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.queryButton7);
+            this.groupBox3.Controls.Add(this.queryButton6);
+            this.groupBox3.Controls.Add(this.queryButton5);
+            this.groupBox3.Controls.Add(this.queryButton4);
+            this.groupBox3.Controls.Add(this.queryButton3);
+            this.groupBox3.Controls.Add(this.queryButton2);
+            this.groupBox3.Controls.Add(this.queryButton1);
+            this.groupBox3.Location = new System.Drawing.Point(8, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(419, 299);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Queries";
+            // 
+            // queryButton7
+            // 
+            this.queryButton7.Location = new System.Drawing.Point(6, 253);
+            this.queryButton7.Name = "queryButton7";
+            this.queryButton7.Size = new System.Drawing.Size(407, 31);
+            this.queryButton7.TabIndex = 6;
+            this.queryButton7.Text = "Users which are trainers AND trainees";
+            this.queryButton7.UseVisualStyleBackColor = true;
+            this.queryButton7.Click += new System.EventHandler(this.queryButton7_Click);
+            // 
+            // queryButton6
+            // 
+            this.queryButton6.Location = new System.Drawing.Point(6, 216);
+            this.queryButton6.Name = "queryButton6";
+            this.queryButton6.Size = new System.Drawing.Size(407, 31);
+            this.queryButton6.TabIndex = 5;
+            this.queryButton6.Text = "All trainers";
+            this.queryButton6.UseVisualStyleBackColor = true;
+            this.queryButton6.Click += new System.EventHandler(this.queryButton6_Click);
+            // 
+            // queryButton5
+            // 
+            this.queryButton5.Location = new System.Drawing.Point(6, 179);
+            this.queryButton5.Name = "queryButton5";
+            this.queryButton5.Size = new System.Drawing.Size(407, 31);
+            this.queryButton5.TabIndex = 4;
+            this.queryButton5.Text = "All trainees";
+            this.queryButton5.UseVisualStyleBackColor = true;
+            this.queryButton5.Click += new System.EventHandler(this.queryButton5_Click);
+            // 
+            // queryButton4
+            // 
+            this.queryButton4.Location = new System.Drawing.Point(6, 142);
+            this.queryButton4.Name = "queryButton4";
+            this.queryButton4.Size = new System.Drawing.Size(407, 31);
+            this.queryButton4.TabIndex = 3;
+            this.queryButton4.Text = "Available certificates";
+            this.queryButton4.UseVisualStyleBackColor = true;
+            this.queryButton4.Click += new System.EventHandler(this.queryButton4_Click);
+            // 
+            // queryButton3
+            // 
+            this.queryButton3.Location = new System.Drawing.Point(6, 105);
+            this.queryButton3.Name = "queryButton3";
+            this.queryButton3.Size = new System.Drawing.Size(407, 31);
+            this.queryButton3.TabIndex = 2;
+            this.queryButton3.Text = "Trainings by cost";
+            this.queryButton3.UseVisualStyleBackColor = true;
+            this.queryButton3.Click += new System.EventHandler(this.queryButton3_Click);
+            // 
+            // queryButton2
+            // 
+            this.queryButton2.Location = new System.Drawing.Point(6, 68);
+            this.queryButton2.Name = "queryButton2";
+            this.queryButton2.Size = new System.Drawing.Size(407, 31);
+            this.queryButton2.TabIndex = 1;
+            this.queryButton2.Text = "Top 5 most active trainees (with at least 3 trainings)";
+            this.queryButton2.UseVisualStyleBackColor = true;
+            this.queryButton2.Click += new System.EventHandler(this.queryButton2_Click);
+            // 
+            // queryButton1
+            // 
+            this.queryButton1.Location = new System.Drawing.Point(6, 31);
+            this.queryButton1.Name = "queryButton1";
+            this.queryButton1.Size = new System.Drawing.Size(407, 31);
+            this.queryButton1.TabIndex = 0;
+            this.queryButton1.Text = "Top 5 users with highest number of certifices";
+            this.queryButton1.UseVisualStyleBackColor = true;
+            this.queryButton1.Click += new System.EventHandler(this.queryButton1_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.printButton);
-            this.groupBox2.Location = new System.Drawing.Point(18, 21);
+            this.groupBox2.Location = new System.Drawing.Point(8, 311);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(419, 96);
             this.groupBox2.TabIndex = 4;
@@ -163,7 +295,7 @@
             // 
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.printToFileButton);
-            this.groupBox1.Location = new System.Drawing.Point(18, 123);
+            this.groupBox1.Location = new System.Drawing.Point(8, 413);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(419, 102);
             this.groupBox1.TabIndex = 3;
@@ -196,7 +328,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(524, 376);
+            this.tabPage5.Size = new System.Drawing.Size(673, 626);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "About";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -233,47 +365,11 @@
             // 
             this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
-            // userManager
-            // 
-            this.userManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userManager.ItemEditor = nullItemEditor1;
-            this.userManager.ItemFactory = nullItemFactory1;
-            this.userManager.ItemRemover = nullItemRemover1;
-            this.userManager.ItemSaver = nullItemSaver1;
-            this.userManager.Location = new System.Drawing.Point(3, 3);
-            this.userManager.Name = "userManager";
-            this.userManager.Size = new System.Drawing.Size(518, 370);
-            this.userManager.TabIndex = 0;
-            // 
-            // trainingManager
-            // 
-            this.trainingManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trainingManager.ItemEditor = nullItemEditor2;
-            this.trainingManager.ItemFactory = nullItemFactory2;
-            this.trainingManager.ItemRemover = nullItemRemover2;
-            this.trainingManager.ItemSaver = nullItemSaver2;
-            this.trainingManager.Location = new System.Drawing.Point(3, 3);
-            this.trainingManager.Name = "trainingManager";
-            this.trainingManager.Size = new System.Drawing.Size(518, 370);
-            this.trainingManager.TabIndex = 0;
-            // 
-            // certificateManager
-            // 
-            this.certificateManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.certificateManager.ItemEditor = nullItemEditor3;
-            this.certificateManager.ItemFactory = nullItemFactory3;
-            this.certificateManager.ItemRemover = nullItemRemover3;
-            this.certificateManager.ItemSaver = nullItemSaver3;
-            this.certificateManager.Location = new System.Drawing.Point(3, 3);
-            this.certificateManager.Name = "certificateManager";
-            this.certificateManager.Size = new System.Drawing.Size(518, 370);
-            this.certificateManager.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 405);
+            this.ClientSize = new System.Drawing.Size(688, 606);
             this.Controls.Add(this.tabControl1);
             this.MinimumSize = new System.Drawing.Size(550, 450);
             this.Name = "MainForm";
@@ -284,6 +380,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -316,6 +413,14 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button queryButton3;
+        private System.Windows.Forms.Button queryButton2;
+        private System.Windows.Forms.Button queryButton1;
+        private System.Windows.Forms.Button queryButton7;
+        private System.Windows.Forms.Button queryButton6;
+        private System.Windows.Forms.Button queryButton5;
+        private System.Windows.Forms.Button queryButton4;
     }
 }
 

@@ -145,6 +145,62 @@ namespace EnterpriseTraining
             _reportGenerator = new ReportGenerator();
         }
 
+        private void queryButton1_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery1);
+            });
+        }
+
+        private void queryButton2_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery2);
+            });
+        }
+
+        private void queryButton3_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery3);
+            });
+        }
+
+        private void queryButton4_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery4);
+            });
+        }
+
+        private void queryButton5_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery5);
+            });
+        }
+
+        private void queryButton6_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery6);
+            });
+        }
+
+        private void queryButton7_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.Invoke(this, delegate()
+            {
+                PrintReportToScreen(this.PrintQuery7);
+            });
+        }
+
         private void printButton_Click(object sender, EventArgs e)
         {
             ExceptionHandler.Invoke(this, delegate()
@@ -153,7 +209,11 @@ namespace EnterpriseTraining
                 {
                     var reportStream = new MemoryStream();
 
-                    PrintReport(new StreamWriter(reportStream));
+                    using (var session = _sessionFactory.Create())
+                    {
+                        PrintReport(new StreamWriter(reportStream), session);
+                    }
+
                     reportStream.Seek(0, SeekOrigin.Begin);
 
                     _printedFile = new StreamReader(reportStream);
@@ -167,11 +227,26 @@ namespace EnterpriseTraining
         {
             ExceptionHandler.Invoke(this, delegate()
             {
-                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
                 {
                     PrintReportToFile(saveFileDialog.FileName);
                 }
             });
+        }
+
+        private delegate void PrintQueryDelegate(TextWriter writer, ISession session);
+
+        private void PrintReportToScreen(PrintQueryDelegate printQuery)
+        {
+            using (var writer = new StringWriter())
+            {
+                using (var session = _sessionFactory.Create())
+                {
+                    printQuery(writer, session);
+                }
+
+                MessageBox.Show(writer.ToString(), "Report", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void PrintReportToFile(string fileName)
@@ -180,50 +255,109 @@ namespace EnterpriseTraining
             {
                 using (var writer = new StreamWriter(fs))
                 {
-                    PrintReport(writer);
+                    using (var session = _sessionFactory.Create())
+                    {
+                        PrintReport(writer, session);
+                    }
                 }
             }
         }
 
-        private void PrintReport(TextWriter writer)
+        private void PrintReport(TextWriter writer, ISession session)
         {
-            using (var session = _sessionFactory.Create())
+            writer.WriteLine("--------------------------------------------------------------------------------");
+            writer.WriteLine("Enterprise Training Report");
+            writer.WriteLine("Date: {0}", DateTime.UtcNow.ToShortDateString());
+            writer.WriteLine("--------------------------------------------------------------------------------");
+            writer.WriteLine();
+            writer.WriteLine("Top 5 users with highest number of certifices:");
+
+            PrintQuery1(writer, session);
+
+            writer.WriteLine();
+            writer.WriteLine("Top 5 most active trainees (with at least 3 trainings):");
+
+            PrintQuery2(writer, session);
+
+            writer.WriteLine();
+            writer.WriteLine("Trainings by cost:");
+
+            PrintQuery3(writer, session);
+
+            writer.WriteLine();
+            writer.WriteLine("Available certificates:");
+
+            PrintQuery4(writer, session);
+
+            writer.WriteLine();
+            writer.WriteLine("All trainees:");
+
+            PrintQuery5(writer, session);
+
+            writer.WriteLine();
+            writer.WriteLine("All trainers:");
+
+            PrintQuery6(writer, session);
+
+            writer.WriteLine();
+            writer.WriteLine("Users which are trainers AND trainees:");
+
+            PrintQuery7(writer, session);
+        }
+
+        private void PrintQuery7(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetUsersWhichAreTrainerAndTrainee(session))
             {
-                writer.WriteLine("--------------------------------------------------------------------------------");
-                writer.WriteLine("Enterprise Training Report");
-                writer.WriteLine("Date: {0}", DateTime.UtcNow.ToShortDateString());
-                writer.WriteLine("--------------------------------------------------------------------------------");
-                writer.WriteLine();
-                writer.WriteLine("Top 5 users with highest number of certifices:");
+                writer.WriteLine(result);
+            }
+        }
 
-                foreach (var result in _reportGenerator.GetUsersWithMostCertificates(session, 5))
-                {
-                    writer.WriteLine("{0} certificate(s) - {1}", result.Item2, result.Item1);
-                }
+        private void PrintQuery6(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetAllTrainers(session))
+            {
+                writer.WriteLine("{0} - {1}", result.Item1, result.Item2);
+            }
+        }
 
-                writer.WriteLine();
-                writer.WriteLine("Top 5 most active trainees (with at least 3 trainings):");
+        private void PrintQuery5(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetAllTrainees(session))
+            {
+                writer.WriteLine("{0} - {1}", result.Item1, result.Item2);
+            }
+        }
 
-                foreach (var result in _reportGenerator.GetMostActiveTrainees(session, 3))
-                {
-                    writer.WriteLine("{0} training(s) - {1}", result.Item2, result.Item1);
-                }
+        private void PrintQuery4(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetAvailableCertificates(session))
+            {
+                writer.WriteLine("{0} - {1} year(s)", result.Item1, result.Item2);
+            }
+        }
 
-                writer.WriteLine();
-                writer.WriteLine("Trainings by cost:");
+        private void PrintQuery3(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetTrainingsByCost(session))
+            {
+                writer.WriteLine("{0:c} - {1}", result.Item2, result.Item1);
+            }
+        }
 
-                foreach (var result in _reportGenerator.GetTrainingsByCost(session))
-                {
-                    writer.WriteLine("{0:c} - {1}", result.Item2, result.Item1);
-                }
+        private void PrintQuery2(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetMostActiveTrainees(session, 3))
+            {
+                writer.WriteLine("{0} training(s) - {1}", result.Item2, result.Item1);
+            }
+        }
 
-                writer.WriteLine();
-                writer.WriteLine("Available certificates:");
-
-                foreach (var result in _reportGenerator.GetAvailableCertificates(session))
-                {
-                    writer.WriteLine("{0} - {1} year(s)", result.Item1, result.Item2);
-                }
+        private void PrintQuery1(TextWriter writer, ISession session)
+        {
+            foreach (var result in _reportGenerator.GetUsersWithMostCertificates(session, 5))
+            {
+                writer.WriteLine("{0} certificate(s) - {1}", result.Item2, result.Item1);
             }
         }
 
